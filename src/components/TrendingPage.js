@@ -6,8 +6,9 @@ import posed, { PoseGroup } from "react-pose";
 
 import { getTrendingMovies } from '../utils';
 import ClipLoader from 'react-spinners/ClipLoader';
+import FaLineChart from 'react-icons/lib/fa/line-chart';
 
-
+import ReactPaginate from 'react-paginate';
 
 const MovieContainer = posed.div({
     enter: {
@@ -21,16 +22,18 @@ class TrendingPage extends Component {
 
     state = {
         fetching: true,
-        trendingMovies: []
+        trendingMovies: [],
+        pageNum: 1
     }
 
     componentDidMount() {
-        getTrendingMovies()
+        getTrendingMovies(this.state.pageNum)
             .then(res => {
                 if (res.results && res.results.length) {
                     this.setState({
                         fetching: false,
-                        trendingMovies: res.results
+                        trendingMovies: res.results,
+                        pageNum: res.total_pages
                     })
                 }
             })
@@ -48,6 +51,50 @@ class TrendingPage extends Component {
         }
     }
 
+    handlePageClick = (page) => {
+        getTrendingMovies(page.selected + 1)
+            .then(res => {
+                if (res.results && res.results.length) {
+                    this.setState({
+                        fetching: false,
+                        trendingMovies: res.results,
+                    })
+                }
+            })
+            .catch(err => console.log(err))
+
+    }
+
+    displayPagination = () => {
+        const { pageNum } = this.state
+        return (
+            <div style={{ display: 'flex', justifyContent: 'center', width: '100%', alignItems: 'center' }}>
+                <ReactPaginate
+                    previousLabel={'<'}
+                    nextLabel={'>'}
+                    breakLabel={'...'}
+                    breakLinkClassName={'link-pagination'}
+                    breakClassName={'page-pagination'}
+                    pageCount={pageNum}
+                    marginPagesDisplayed={2}
+                    pageRangeDisplayed={5}
+                    onPageChange={this.handlePageClick}
+                    containerClassName={'pagination-div'}
+                    subContainerClassName={'pages-pagination'}
+                    pageLinkClassName={'link-pagination'}
+                    pageClassName={'page-pagination'}
+                    activeClassName={'active-div-page'}
+                    activeLinkClassName={'active-link-page'}
+                    previousLinkClassName={'link-pagination'}
+                    nextLinkClassName={'link-pagination'}
+                    previousClassName={'page-pagination'}
+                    nextClassName={'page-pagination'}
+                />
+            </div>
+        )
+    }
+
+
     render() {
         const { fetching } = this.state
         let movies = this.trendingMoviesList()
@@ -55,7 +102,7 @@ class TrendingPage extends Component {
         return (
             <React.Fragment>
                 <div className='component-header'>
-                    <h4>Trending</h4>
+                    <h4>Trending <FaLineChart /></h4>
                 </div>
                 {fetching ?
                     <div style={{ width: '100%', marginTop: 100 }}>
@@ -66,9 +113,11 @@ class TrendingPage extends Component {
                         />
                     </div> :
                     <div className="movies-list">
+                        {this.displayPagination()}
                         <PoseGroup animateOnMount>
                             {(movies && movies.length) ? movies : <EmptyStatePage key="empty-page" message="No available movies" />}
                         </PoseGroup>
+                        {this.displayPagination()}
                     </div>
                 }
             </React.Fragment>

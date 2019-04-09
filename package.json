@@ -20,6 +20,7 @@
     "react-dom": "^16.4.2",
     "react-icons": "^2",
     "react-motion": "^0.5.2",
+    "react-paginate": "^6.3.0",
     "react-pose": "^4.0.8",
     "react-rating": "^1.6.2",
     "react-redux": "^5.0.7",

@@ -5,6 +5,9 @@ import EmptyStatePage from "./EmptyStatePage";
 import posed, { PoseGroup } from "react-pose";
 
 
+import Octicon, { Pin } from '@githubprimer/octicons-react';
+
+
 const MovieContainer = posed.div({
     enter: {
         scale: 1,
@@ -23,7 +26,7 @@ class MyBookmarks extends Component {
 
                 return movie.id && (
                     <MovieContainer key={movie.id} i={i} className="movie-item">
-                        <MovieItem movie={movie}  {...this.props}/>
+                        <MovieItem movie={movie}  {...this.props} />
                     </MovieContainer>
                 )
             })
@@ -36,7 +39,7 @@ class MyBookmarks extends Component {
         return (
             <React.Fragment>
                 <div className='component-header'>
-                    <h4>My Bookmarks</h4>
+                    <h4>My Bookmarks <Octicon size={30} icon={Pin}/></h4>
                 </div>
                 <div className="movies-list">
                     <PoseGroup animateOnMount>

@@ -140,10 +140,10 @@ class MovieItem extends Component {
         const finished = finishedMovies.some(item => item.id === this.props.movie.id)
         const { movieHoverStatus, showOptionsMenu } = this.state
         const isFinishedPage = window.location.pathname === '/finished'
-        const isMainPage = window.location.pathname === '/search' || window.location.pathname === '/'
         const isRatedListPage = window.location.pathname === '/rated'
         const isBookmarksPage = window.location.pathname === '/bookmarks'
         const isPlanPage = window.location.pathname === '/plan'
+
 
         return (
             <Item pose='open' style={{ position: 'relative', height: '400px', width: '300px' }} onMouseEnter={() => this.handleMouseHover(true)} onMouseLeave={() => this.handleMouseHover(false) & this.setState({ showOptionsMenu: false })}>
@@ -175,13 +175,13 @@ class MovieItem extends Component {
                         </a>
                         {showOptionsMenu &&
                             <div className="buttons-div">
-                                {!isFinishedPage && !isRatedListPage && !isBookmarksPage && !isPlanPage && !finished && (
+                                {!isFinishedPage && !isRatedListPage && !isPlanPage && !finished && (
                                     <div onClick={() => (!inMyPlan || !finished ) && this.handleAddToPlan(this.props.movie)}> {(inMyPlan || finished ) ? 'In my plan' : 'Add to plan'} </div>
                                 )}
-                                {!isFinishedPage && !isBookmarksPage && (
+                                {!isFinishedPage &&  (
                                     <div onClick={() => !finished && this.handleAddToFinishedList(this.props.movie)}> {finished ? 'Finished' : 'Add to finished list'} </div>
                                 )}
-                                {!isMainPage && (
+                                {isBookmarksPage || isFinishedPage || isPlanPage || isRatedListPage && (
                                     <div className="remove-btn" style={{ width: isBookmarksPage ? '100%' : '50%' }} onClick={this.displayRemoveModal}> Remove </div>
                                 )}
                             </div>

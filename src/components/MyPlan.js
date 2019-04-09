@@ -4,6 +4,8 @@ import MovieItem from "./MovieItem"
 import EmptyStatePage from "./EmptyStatePage";
 import posed, { PoseGroup } from 'react-pose'
 
+import  Octicon, { Tasklist }  from '@githubprimer/octicons-react';
+
 const MovieContainer = posed.div({
     enter: {
         scale: 1,
@@ -35,7 +37,7 @@ class MyPlan extends Component {
         return (
             <React.Fragment>
                 <div className='component-header'>
-                    <h4>My Plan</h4>
+                    <h4>My Plan <Octicon size={30} icon={Tasklist}/></h4>
                 </div>
                 <div className="movies-list">
                     <PoseGroup animateOnMount>

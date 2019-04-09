@@ -37,7 +37,7 @@ class RatedList extends Component {
         return (
             <React.Fragment>
                 <div className='component-header'>
-                    <h4>My Ratings</h4>
+                    <h4>My Ratings <Octicon size={30} icon={Star}/></h4>
                 </div>
                 <div className="movies-list">
                     {ratedList && ratedList.length ? ratedList : <EmptyStatePage message="No movies in your rated list :(" />}

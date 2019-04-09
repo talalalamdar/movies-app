@@ -369,6 +369,55 @@ body {
   margin-top: 50px;
 }
 
+.pagination-div {
+  padding: 0px;
+  display: flex;
+  list-style: none;
+  cursor: pointer;
+  border-radius: 4px;
+  border: 1px solid lightgray;
+  box-shadow: 0px 1px 4px 0 rgba(0, 0, 0, 0.2)
+}
+
+.pages-pagination {
+  width: 100%;
+}
+
+.active-div-page {
+  background-color: rgb(59, 122, 40);
+}
+
+.active-div-page:hover {
+  background-color: rgb(59, 122, 40) !important;
+}
+
+
+.active-link-page {
+  color: white !important;
+}
+
+.link-pagination:focus {
+  outline: none;
+}
+
+.link-pagination {
+  padding: 10px 20px;
+  color: rgb(59, 122, 40);
+}
+
+.link-pagination:hover {
+  color: rgb(59, 122, 40);
+}
+
+.page-pagination {
+  border-right: 1px solid lightgray;
+}
+
+.page-pagination:hover {
+  background-color: rgb(233, 233, 233);
+}
+
+
 h6 {
   font-weight: 550;
 }
@@ -402,7 +451,6 @@ a {
 a:hover {
   color: white;
   text-decoration: none;
-
 }
 
 @media only screen and (min-width: 768px) {

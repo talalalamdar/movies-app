@@ -6,7 +6,9 @@ import posed, { PoseGroup } from "react-pose";
 
 import { getPopularMovies } from '../utils';
 import ClipLoader from 'react-spinners/ClipLoader';
+import Octicon, { Pulse } from "@githubprimer/octicons-react";
 
+import ReactPaginate from 'react-paginate'
 
 
 const MovieContainer = posed.div({
@@ -21,16 +23,18 @@ class PopularPage extends Component {
 
     state = {
         fetching: true,
-        popularMovies: []
+        popularMovies: [],
+        pagesNum: 1
     }
 
     componentDidMount() {
-        getPopularMovies()
+        getPopularMovies(this.state.pageNum)
             .then(res => {
                 if (res.results && res.results.length) {
                     this.setState({
                         fetching: false,
-                        popularMovies: res.results
+                        popularMovies: res.results,
+                        pagesNum: res.total_pages
                     })
                 }
             })
@@ -48,6 +52,50 @@ class PopularPage extends Component {
         }
     }
 
+    handlePageClick = (page) => {
+        getPopularMovies(page.selected + 1)
+            .then(res => {
+                if (res.results && res.results.length) {
+                    this.setState({
+                        fetching: false,
+                        popularMovies: res.results,
+                        pagesNum: res.total_pages
+                    })
+                }
+            })
+            .catch(err => console.log(err))
+
+    }
+
+    displayPagination = () => {
+        const { pageNum } = this.state
+        return (
+            <div style={{ display: 'flex', justifyContent: 'center', width: '100%', alignItems: 'center' }}>
+                <ReactPaginate
+                    previousLabel={'<'}
+                    nextLabel={'>'}
+                    breakLabel={'...'}
+                    breakLinkClassName={'link-pagination'}
+                    breakClassName={'page-pagination'}
+                    pageCount={pageNum}
+                    marginPagesDisplayed={2}
+                    pageRangeDisplayed={5}
+                    onPageChange={this.handlePageClick}
+                    containerClassName={'pagination-div'}
+                    subContainerClassName={'pages-pagination'}
+                    pageLinkClassName={'link-pagination'}
+                    pageClassName={'page-pagination'}
+                    activeClassName={'active-div-page'}
+                    activeLinkClassName={'active-link-page'}
+                    previousLinkClassName={'link-pagination'}
+                    nextLinkClassName={'link-pagination'}
+                    previousClassName={'page-pagination'}
+                    nextClassName={'page-pagination'}
+                />
+            </div>
+        )
+    }
+
     render() {
         const { fetching } = this.state
         let movies = this.popularMoviesList()
@@ -55,7 +103,7 @@ class PopularPage extends Component {
         return (
             <React.Fragment>
                 <div className='component-header'>
-                    <h4>Popular</h4>
+                    <h4>Popular <Octicon size={30} icon={Pulse} /></h4>
                 </div>
                 {fetching ?
                     <div style={{ width: '100%', marginTop: 100 }}>
@@ -66,9 +114,12 @@ class PopularPage extends Component {
                         />
                     </div> :
                     <div className="movies-list">
+                        {this.displayPagination()}
                         <PoseGroup animateOnMount>
-                            {(movies && movies.length) ? movies : <EmptyStatePage key="empty-page" message="No available movies" />}
+                            {(movies && movies.length) && movies}
                         </PoseGroup>
+                        {this.displayPagination()}
+
                     </div>
                 }
             </React.Fragment>

@@ -5,8 +5,8 @@ const BASE_MOVIE_URL = "https://api.themoviedb.org/3/movie"
 const BASE_URL_TRENDING = 'https://api.themoviedb.org/3/trending'
 
 
-export const searchMovies = async (query) => {
-    let movies = fetch(`${BASE_SEARCH_URL}?query=${query}&api_key=${APIKEY.key}`)
+export const searchMovies = async (query, pageNum) => {
+    let movies = fetch(`${BASE_SEARCH_URL}?query=${query}&api_key=${APIKEY.key}&page=${pageNum}`)
         .then(res => res.json())
         .catch(err => console.log(err))
 
@@ -38,40 +38,40 @@ export const getSimilarMovies = async (movieId) => {
     return await movies
 }
 
-export const getNowPlayingMovies = async () => {
-    let movies = fetch(`${BASE_MOVIE_URL}/now_playing?api_key=${APIKEY.key}`)
+export const getNowPlayingMovies = async (pageNum) => {
+    let movies = fetch(`${BASE_MOVIE_URL}/now_playing?api_key=${APIKEY.key}&page=${pageNum}`)
         .then(res => res.json())
         .catch(err => console.log(err))
 
     return await movies
 }
 
-export const getTopRatedMovies = async () => {
-    let movies = fetch(`${BASE_MOVIE_URL}/top_rated?api_key=${APIKEY.key}`)
+export const getTopRatedMovies = async (pageNum) => {
+    let movies = fetch(`${BASE_MOVIE_URL}/top_rated?api_key=${APIKEY.key}&page=${pageNum}`)
         .then(res => res.json())
         .catch(err => console.log(err))
 
     return await movies
 }
 
-export const getUpcomingMovies = async () => {
-    let movies = fetch(`${BASE_MOVIE_URL}/upcoming?api_key=${APIKEY.key}`)
+export const getUpcomingMovies = async (pageNum) => {
+    let movies = fetch(`${BASE_MOVIE_URL}/upcoming?api_key=${APIKEY.key}&page=${pageNum}`)
         .then(res => res.json())
         .catch(err => console.log(err))
 
     return await movies
 }
 
-export const getPopularMovies = async () => {
-    let movies = fetch(`${BASE_MOVIE_URL}/popular?api_key=${APIKEY.key}`)
+export const getPopularMovies = async (pageNum) => {
+    let movies = fetch(`${BASE_MOVIE_URL}/popular?api_key=${APIKEY.key}&page=${pageNum}`)
         .then(res => res.json())
         .catch(err => console.log(err))
 
     return await movies
 }
 
-export const getTrendingMovies = async () => {
-    let movies = fetch(`${BASE_URL_TRENDING}/movie/week?api_key=${APIKEY.key}`)
+export const getTrendingMovies = async (pageNum) => {
+    let movies = fetch(`${BASE_URL_TRENDING}/movie/week?api_key=${APIKEY.key}&page=${pageNum}`)
         .then(res => res.json())
         .catch(err => console.log(err))
 

@@ -6,10 +6,11 @@ import { connect } from "react-redux"
 import { searchMovies } from "../utils"
 import store from "../redux/store/store"
 import { onSearchAction, listSearchedMovies } from "../redux/actions/searchActions"
-import EmptyStatePage from "./EmptyStatePage";
 
 import ClipLoader from 'react-spinners/ClipLoader';
 import posed, { PoseGroup } from 'react-pose'
+
+import ReactPaginate from 'react-paginate';
 
 
 const Box = posed.button({
@@ -30,7 +31,8 @@ const MovieContainer = posed.div({
 class SearchPage extends Component {
 
     state = {
-        fetching: false
+        fetching: false,
+        pagesNum: 1
     }
 
     handleInputChange = (val) => {
@@ -42,17 +44,17 @@ class SearchPage extends Component {
         this.setState({ fetching: true }, () => {
             const { searchQuery } = this.props.searchReducer
             if (searchQuery.length < 1) {
-                this.setState({fetching: false})
+                this.setState({ fetching: false })
                 return
             }
-            searchMovies(searchQuery)
+            searchMovies(searchQuery, 1)
                 .then(result => {
                     this.props.fetchMovies(result.results)
-                    this.setState({ fetching: false })
+                    this.setState({ fetching: false, pagesNum: result.total_pages })
                     let searchDiv = document.getElementById('scroll-to-submit')
                     searchDiv.scrollIntoView({ behavior: 'smooth', top: '1px', block: "start", inline: 'start', alignToTop: true })
                 })
-                .catch(err => console.log(err) & this.setState({fetching: false}))
+                .catch(err => console.log(err) & this.setState({ fetching: false }))
 
         })
     }
@@ -73,6 +75,48 @@ class SearchPage extends Component {
             })
             return movies
         }
+    }
+
+    handlePageClick = (page) => {
+        const { searchQuery } = this.props.searchReducer
+        searchMovies(searchQuery, page.selected + 1)
+            .then(result => {
+                this.props.fetchMovies([])
+                this.props.fetchMovies(result.results)
+                this.setState({ fetching: false })
+                let searchDiv = document.getElementById('scroll-to-submit')
+                searchDiv.scrollIntoView({ behavior: 'smooth', top: '1px', block: "start", inline: 'start', alignToTop: true })
+            })
+            .catch(err => console.log(err) & this.setState({ fetching: false }))
+
+    }
+
+    displayPagination = () => {
+        return (
+            <div style={{display: 'flex', justifyContent: 'center', width: '100%', alignItems: 'center'}}>
+                <ReactPaginate
+                    previousLabel={'<'}
+                    nextLabel={'>'}
+                    breakLabel={'...'}
+                    breakLinkClassName={'link-pagination'}
+                    breakClassName={'page-pagination'}
+                    pageCount={this.state.pagesNum}
+                    marginPagesDisplayed={2}
+                    pageRangeDisplayed={5}
+                    onPageChange={this.handlePageClick}
+                    containerClassName={'pagination-div'}
+                    subContainerClassName={'pages-pagination'}
+                    pageLinkClassName={'link-pagination'}
+                    pageClassName={'page-pagination'}
+                    activeClassName={'active-div-page'}
+                    activeLinkClassName={'active-link-page'}
+                    previousLinkClassName={'link-pagination'}
+                    nextLinkClassName={'link-pagination'}
+                    previousClassName={'page-pagination'}
+                    nextClassName={'page-pagination'}
+                />
+            </div>
+        )
     }
 
     render() {
@@ -101,9 +145,11 @@ class SearchPage extends Component {
                         />
                     </div> :
                     <div className="movies-list">
+                        {this.displayPagination()}
                         <PoseGroup animateOnMount>
-                            {(movies && movies.length) ? movies : <EmptyStatePage key="empty-page" message="No available movies" />}
+                            {(movies && movies.length) && movies}
                         </PoseGroup>
+                        {this.displayPagination()}
                     </div>
                 }
             </div>

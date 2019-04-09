@@ -3,6 +3,7 @@ import { connect } from "react-redux"
 import MovieItem from "./MovieItem"
 import EmptyStatePage from "./EmptyStatePage";
 import posed, { PoseGroup } from "react-pose";
+import Octicon, { Check } from "@githubprimer/octicons-react";
 
 const MovieContainer = posed.div({
     enter: {
@@ -20,7 +21,7 @@ class FinishedPage extends Component {
             const movies = finishedMovies.map((movie, i) => {
                 return (
                     <MovieContainer key={movie.id} i={i} className="movie-item">
-                        <MovieItem movie={movie}  {...this.props}/>
+                        <MovieItem movie={movie}  {...this.props} />
                     </MovieContainer>
                 )
             })
@@ -33,7 +34,7 @@ class FinishedPage extends Component {
         return (
             <React.Fragment>
                 <div className='component-header'>
-                    <h4>Finished Watching</h4>
+                    <h4>Finished Watching <Octicon size={30} icon={Check} /></h4>
                 </div>
                 <div className="movies-list">
                     <PoseGroup animateOnMount>

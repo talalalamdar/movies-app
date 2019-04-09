@@ -6,6 +6,9 @@ import posed, { PoseGroup } from "react-pose";
 
 import { getTopRatedMovies } from '../utils';
 import ClipLoader from 'react-spinners/ClipLoader';
+import FaTrophy from 'react-icons/lib/fa/trophy';
+
+import ReactPaginate from 'react-paginate';
 
 
 
@@ -21,16 +24,18 @@ class TopRated extends Component {
 
     state = {
         fetching: true,
-        topMovies: []
+        topMovies: [],
+        pageNum: 1
     }
 
     componentDidMount() {
-        getTopRatedMovies()
+        getTopRatedMovies(this.state.pageNum)
             .then(res => {
                 if (res.results && res.results.length) {
                     this.setState({
                         fetching: false,
-                        topMovies: res.results
+                        topMovies: res.results,
+                        pageNum: res.total_pages
                     })
                 }
             })
@@ -48,6 +53,49 @@ class TopRated extends Component {
         }
     }
 
+    handlePageClick = (page) => {
+        getTopRatedMovies(page.selected + 1)
+            .then(res => {
+                if (res.results && res.results.length) {
+                    this.setState({
+                        fetching: false,
+                        topMovies: res.results,
+                    })
+                }
+            })
+            .catch(err => console.log(err))
+
+    }
+
+    displayPagination = () => {
+        const { pageNum } = this.state
+        return (
+            <div style={{ display: 'flex', justifyContent: 'center', width: '100%', alignItems: 'center' }}>
+                <ReactPaginate
+                    previousLabel={'<'}
+                    nextLabel={'>'}
+                    breakLabel={'...'}
+                    breakLinkClassName={'link-pagination'}
+                    breakClassName={'page-pagination'}
+                    pageCount={pageNum}
+                    marginPagesDisplayed={2}
+                    pageRangeDisplayed={5}
+                    onPageChange={this.handlePageClick}
+                    containerClassName={'pagination-div'}
+                    subContainerClassName={'pages-pagination'}
+                    pageLinkClassName={'link-pagination'}
+                    pageClassName={'page-pagination'}
+                    activeClassName={'active-div-page'}
+                    activeLinkClassName={'active-link-page'}
+                    previousLinkClassName={'link-pagination'}
+                    nextLinkClassName={'link-pagination'}
+                    previousClassName={'page-pagination'}
+                    nextClassName={'page-pagination'}
+                />
+            </div>
+        )
+    }
+    
     render() {
         const { fetching } = this.state
         let movies = this.topRatedMoviesList()
@@ -55,7 +103,7 @@ class TopRated extends Component {
         return (
             <React.Fragment>
                 <div className='component-header'>
-                    <h4>Top Rated</h4>
+                    <h4>Top Rated <FaTrophy /></h4>
                 </div>
                 {fetching ?
                     <div style={{ width: '100%', marginTop: 100 }}>
@@ -66,9 +114,11 @@ class TopRated extends Component {
                         />
                     </div> :
                     <div className="movies-list">
+                        {this.displayPagination()}
                         <PoseGroup animateOnMount>
-                            {(movies && movies.length) ? movies : <EmptyStatePage key="empty-page" message="No available movies" />}
+                            {(movies && movies.length) && movies}
                         </PoseGroup>
+                        {this.displayPagination()}
                     </div>
                 }
             </React.Fragment>
