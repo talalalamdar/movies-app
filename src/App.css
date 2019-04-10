@@ -28,7 +28,7 @@ body {
 }
 
 .App-title {
-  font-size: 1em;
+  font-size: 2em;
 }
 
 .nav {
@@ -40,7 +40,7 @@ body {
   top: 0px;
   right: 0px;
   height: 100vh;
-  overflow: visible;
+  overflow: scroll;
   float: right;
   z-index: 10;
 }
@@ -85,14 +85,14 @@ body {
 }
 
 .component-header > div > h4 {
-  font-weight: 550;
-  font-size: 25px;
+  font-weight: 650;
+  font-size: 20px;
   color: rgb(59, 122, 40);
 }
 
 .component-header > h4 {
-  font-weight: 550;
-  font-size: 25px;
+  font-weight: 650;
+  font-size: 20px;
   color: rgb(59, 122, 40);
 }
 
@@ -185,7 +185,7 @@ body {
 }
 
 .movie-item:hover {
-  box-shadow: 0 0px 0px 12px rgba(144, 247, 114, 0.5), 0 0px 0px 12px rgba(144, 247, 114, 0.5);
+  box-shadow: 0 0px 0px 12px rgba(144, 247, 114, 0.3), 0 0px 0px 12px rgba(144, 247, 114, 0.3);
 }
 
 .rate-start-icon {
@@ -426,7 +426,7 @@ body {
   padding: 5px 7px;
   color: rgb(59, 122, 40);
   font-size: 15px;
-  font-weight: 550;
+  font-weight: 650;
 }
 
 .link-pagination:hover {
@@ -454,7 +454,7 @@ body {
 }
 
 h6 {
-  font-weight: 550;
+  font-weight: 650;
 }
 
 h1 {
@@ -510,7 +510,7 @@ a:hover {
     height: 500px !important;
   }
   .component-header {
-    padding: 15px 0px 8px 170px;
+    padding: 15px 0px 8px 100px;
   }
   .sidebar-overview {
     width: 100%;
@@ -527,6 +527,16 @@ a:hover {
   }
   .link-pagination {
     padding: 10px 14px;
+  }
+  .App-title {
+    font-size: 1em;
+  }
+  .component-header > div > h4 {
+    font-size: 25px;
+  }
+  
+  .component-header > h4 {
+    font-size: 25px;
   }
 }
 
@@ -551,6 +561,9 @@ a:hover {
     outline: none;
     border: none;
   }
+  .component-header {
+    padding: 15px 0px 8px 170px;
+  }
   .sidebar-overview {
     width: 30%;
   }
@@ -564,6 +577,9 @@ a:hover {
     height: 400px;
     width: 300px;
   }
+  .App-title {
+    font-size: 1em;
+      }
 }
 
 @keyframes fadeIn {

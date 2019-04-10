@@ -160,6 +160,12 @@ class MovieDetails extends Component {
         this.props.onRemoveFromRatedList(filteredMovies)
     }
 
+    handleRatingChange = (val) => {
+        this.setState({
+            rate: val
+        })
+    }
+
     displayMovie = () => {
         const { movie, reviews, rate } = this.state
 

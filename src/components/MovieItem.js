@@ -169,7 +169,7 @@ class MovieItem extends Component {
                                 <Octicon className="rate-start-icon" size='medium' icon={Star} /> <strong> {vote_average ? vote_average : "Unavailable"} </strong> <br />
                                 <Octicon className="users-votes-icon" size={20} icon={Organization} /> <strong> {vote_count ? vote_count : "Unavailable"}</strong> <br />
                                 <Octicon className="users-votes-icon" size={20} icon={Pulse} /> <strong>{popularity ? popularity : "Unavailable"}</strong><br />
-                                <strong>{release_date && release_date}</strong> <br />
+                                <strong style={{padding: 5}}>{release_date && release_date}</strong> <br />
                             </div>
                            
                         </a>

@@ -116,7 +116,7 @@ class SearchPage extends Component {
     }
 
     displayPagination = () => {
-        return (
+        return this.state.totalResults > 0 && (
             <div style={{ display: 'flex', justifyContent: 'center', width: '100%', alignItems: 'center' }}>
                 <ReactPaginate
                     previousLabel={'<'}
