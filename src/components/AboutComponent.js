@@ -21,7 +21,7 @@ class AboutComponent extends React.Component {
                         - See Latest, Trending, Upcoming and Popular<br />
                         Built using HTML, CSS, JavaScript, ReactJs, Redux, React-router, Bootstrap, Restful API, and other libraries
                     </p>
-                    <span>By </span> <a target='__blank' href='https://talalalamdar.surge.sh'> Talal Alamdar</a><br /> <br />
+                    <span>By </span> <a style={{color: 'blue'}} target='__blank' href='https://talalalamdar.surge.sh'> Talal Alamdar</a><br /> <br />
                     <img src={MovieDBLogo} alt='movie-db-logo' width={'10%'} />
                 </div>
             </React.Fragment>

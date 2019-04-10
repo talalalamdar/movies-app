@@ -1,7 +1,7 @@
 import React, { Component } from "react"
 import { connect } from "react-redux"
 import Octicon, { Star, Organization, Pulse, ArrowLeft, Pin } from '@githubprimer/octicons-react';
-import { getMovie, getReviews, getSimilarMovies } from '../utils'
+import { getMovie, getReviews, getSimilarMovies, getRecommendedMovies } from '../utils'
 import unavailablePoster from '../assets/poster-unavailable.jpg'
 import numeral from 'numeral'
 import ReactTooltip from 'react-tooltip'
@@ -19,6 +19,8 @@ import MovieItem from './MovieItem';
 
 import posed, { PoseGroup } from 'react-pose'
 import Rating from 'react-rating'
+import MdInfo from 'react-icons/lib/md/info'
+import MdRateReview from 'react-icons/lib/md/rate-review'
 
 const override = css`
 display: flex;
@@ -45,6 +47,7 @@ class MovieDetails extends Component {
         movie: {},
         reviews: [],
         similarMovies: [],
+        recommended: [],
         rate: null
     }
 
@@ -83,6 +86,13 @@ class MovieDetails extends Component {
                 })
             })
             .catch(err => console.log(err))
+        getRecommendedMovies(id)
+            .then(res => {
+                this.setState({
+                    recommended: res.results
+                })
+            })
+            .catch(err => console.log(err))
     }
 
     handleAddToFavorite = (movie) => {
@@ -112,7 +122,18 @@ class MovieDetails extends Component {
 
     renderSimilarMoviesList = () => {
         const movies = this.state.similarMovies.map((movie, i) => {
-            return (
+            return i < 6 && (
+                <MovieContainer pose='enter' i={i} initialPose='exit' key={movie.id} className="movie-item" >
+                    <MovieItem movie={movie} {...this.props} />
+                </MovieContainer>
+            )
+        })
+        return movies
+    }
+
+    renderRecommendedMoviesList = () => {
+        const movies = this.state.recommended.map((movie, i) => {
+            return i < 6 && (
                 <MovieContainer pose='enter' i={i} initialPose='exit' key={movie.id} className="movie-item" >
                     <MovieItem movie={movie} {...this.props} />
                 </MovieContainer>
@@ -139,12 +160,6 @@ class MovieDetails extends Component {
         this.props.onRemoveFromRatedList(filteredMovies)
     }
 
-    handleRatingChange = (val) => {
-        this.setState({
-            rate: val
-        })
-    }
-
     displayMovie = () => {
         const { movie, reviews, rate } = this.state
 
@@ -156,10 +171,10 @@ class MovieDetails extends Component {
         const inMyPlan = moviesPlan.some(movie => movie.id === this.state.movie.id)
 
         const similarMovies = this.renderSimilarMoviesList()
-
+        const recommendedMovies = this.renderRecommendedMoviesList()
 
         return (
-            <div style={{ display: 'flex', justifyContent: 'center', flexFlow: 'row wrap', padding: 100 }}>
+            <div className='movie-details-div' style={{ display: 'flex', justifyContent: 'center', flexFlow: 'row wrap' }}>
                 <div className='sidebar-overview'>
                     <div title='bookmark' style={{ width: '100%', textAlign: 'right', paddingRight: 70 }} className={isBookmarked ? 'bookmarked-icon' : 'bookmark-icon'} onClick={() => this.handleAddToFavorite(movie)}>
                         <Octicon size={35} icon={Pin} />
@@ -216,10 +231,10 @@ class MovieDetails extends Component {
                             {movie.overview}
                         </p>
                     </div>
-                    <h6 style={{ color: 'rgb(59, 122, 40)' }}>General Info</h6>
+                    <h6 style={{ color: 'rgb(59, 122, 40)' }}>General Info <MdInfo /></h6>
                     <div style={{ fontSize: 18, padding: 20 }}>
                         {movie.homepage &&
-                            <span><strong>Home Page: </strong><a target='__blank' href={movie.homepage}>{movie.homepage}</a><br /></span>
+                            <span><strong>Home Page: </strong><a style={{ color: 'blue' }} target='__blank' href={movie.homepage}>{movie.homepage}</a><br /></span>
                         }
                         {movie.original_language &&
                             <span><strong>Original Language:</strong> {movie.original_language}<br /></span>
@@ -265,8 +280,8 @@ class MovieDetails extends Component {
                     </div>
                     {
                         reviews.length > 0 &&
-                        <div style={{ marginTop: 50 }}>
-                            <h6 style={{ color: 'rgb(59, 122, 40)' }}>Reviews</h6>
+                        <div style={{ marginTop: 50 }} className='reviews-div'>
+                            <h6>Reviews <MdRateReview /></h6>
                             {reviews.map((review, i) => i < 10 && <Review key={review.id} review={review} />)}
                         </div>
                     }
@@ -277,6 +292,17 @@ class MovieDetails extends Component {
                             <div className="movies-list">
                                 <PoseGroup animateOnMount>
                                     {similarMovies && similarMovies.length && similarMovies}
+                                </PoseGroup>
+                            </div>
+                        </div>
+                    }
+                    {
+                        recommendedMovies.length > 0 &&
+                        <div className='recommended-movies-div'>
+                            <h6>Recommended</h6>
+                            <div className="movies-list">
+                                <PoseGroup animateOnMount>
+                                    {recommendedMovies && recommendedMovies.length && recommendedMovies}
                                 </PoseGroup>
                             </div>
                         </div>

@@ -1,7 +1,6 @@
 import React, { Component } from "react"
 import { connect } from "react-redux"
 import MovieItem from "./MovieItem"
-import EmptyStatePage from "./EmptyStatePage";
 import posed, { PoseGroup } from "react-pose";
 
 import { getPopularMovies } from '../utils';

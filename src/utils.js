@@ -62,6 +62,14 @@ export const getUpcomingMovies = async (pageNum) => {
     return await movies
 }
 
+export const getRecommendedMovies = async (movieId) => {
+    let movies = fetch(`${BASE_MOVIE_URL}/${movieId}/recommendations?api_key=${APIKEY.key}`)
+        .then(res => res.json())
+        .catch(err => console.log(err))
+
+    return await movies
+}
+
 export const getPopularMovies = async (pageNum) => {
     let movies = fetch(`${BASE_MOVIE_URL}/popular?api_key=${APIKEY.key}&page=${pageNum}`)
         .then(res => res.json())

@@ -146,7 +146,7 @@ class MovieItem extends Component {
 
 
         return (
-            <Item pose='open' style={{ position: 'relative', height: '400px', width: '300px' }} onMouseEnter={() => this.handleMouseHover(true)} onMouseLeave={() => this.handleMouseHover(false) & this.setState({ showOptionsMenu: false })}>
+            <Item pose='open' className='movie-div' onMouseEnter={() => this.handleMouseHover(true)} onMouseLeave={() => this.handleMouseHover(false) & this.setState({ showOptionsMenu: false })}>
 
                 <img style={{ position: 'absolute', top: '0px', left: '0px', width: '100%', height: '100%', zIndex: -10 }} className={poster_path ? "img-thumbnail" : "unknown-thumbnail"} src={poster_path ? `https://image.tmdb.org/t/p/w500${poster_path}` : unavailablePoster} alt={`${title}-movie`} />
 
@@ -181,7 +181,7 @@ class MovieItem extends Component {
                                 {!isFinishedPage &&  (
                                     <div onClick={() => !finished && this.handleAddToFinishedList(this.props.movie)}> {finished ? 'Finished' : 'Add to finished list'} </div>
                                 )}
-                                {isBookmarksPage || isFinishedPage || isPlanPage || isRatedListPage && (
+                                {(isBookmarksPage || isFinishedPage || isPlanPage || isRatedListPage) && (
                                     <div className="remove-btn" style={{ width: isBookmarksPage ? '100%' : '50%' }} onClick={this.displayRemoveModal}> Remove </div>
                                 )}
                             </div>

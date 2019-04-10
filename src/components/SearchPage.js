@@ -32,11 +32,35 @@ class SearchPage extends Component {
 
     state = {
         fetching: false,
-        pagesNum: 1
+        pagesNum: 1,
+        totalResults: 0
     }
 
     handleInputChange = (val) => {
         this.props.changeSearchQuery(val)
+    }
+
+    componentDidMount() {
+        const { searchQuery } = this.props.searchReducer
+
+        if (searchQuery.length > 0) {
+            this.setState({ fetching: true }, () => {
+                const { searchQuery } = this.props.searchReducer
+                if (searchQuery.length < 1) {
+                    this.setState({ fetching: false })
+                    return
+                }
+                searchMovies(searchQuery, 1)
+                    .then(result => {
+                        this.props.fetchMovies(result.results)
+                        this.setState({ fetching: false, pagesNum: result.total_pages, totalResults: result.total_results })
+                        let searchDiv = document.getElementById('scroll-to-submit')
+                        searchDiv.scrollIntoView({ behavior: 'smooth', top: '1px', block: "start", inline: 'start', alignToTop: true })
+                    })
+                    .catch(err => console.log(err) & this.setState({ fetching: false }))
+
+            })
+        }
     }
 
     submitSearch = (e) => {
@@ -50,7 +74,7 @@ class SearchPage extends Component {
             searchMovies(searchQuery, 1)
                 .then(result => {
                     this.props.fetchMovies(result.results)
-                    this.setState({ fetching: false, pagesNum: result.total_pages })
+                    this.setState({ fetching: false, pagesNum: result.total_pages, totalResults: result.total_results })
                     let searchDiv = document.getElementById('scroll-to-submit')
                     searchDiv.scrollIntoView({ behavior: 'smooth', top: '1px', block: "start", inline: 'start', alignToTop: true })
                 })
@@ -93,7 +117,7 @@ class SearchPage extends Component {
 
     displayPagination = () => {
         return (
-            <div style={{display: 'flex', justifyContent: 'center', width: '100%', alignItems: 'center'}}>
+            <div style={{ display: 'flex', justifyContent: 'center', width: '100%', alignItems: 'center' }}>
                 <ReactPaginate
                     previousLabel={'<'}
                     nextLabel={'>'}
@@ -146,6 +170,9 @@ class SearchPage extends Component {
                     </div> :
                     <div className="movies-list">
                         {this.displayPagination()}
+                        <div style={{ display: 'block', width: '100%', color: 'gray' }}>
+                            Total Search Results {this.state.totalResults}
+                        </div>
                         <PoseGroup animateOnMount>
                             {(movies && movies.length) && movies}
                         </PoseGroup>

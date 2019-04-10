@@ -7,8 +7,8 @@ import posed, { PoseGroup } from "react-pose";
 import { getTrendingMovies, getNowPlayingMovies, getUpcomingMovies, getPopularMovies } from '../utils';
 import ClipLoader from 'react-spinners/ClipLoader';
 
-import Octicon, { Search, Tasklist, Star, Check, Pin, Info, Play, Home, Pulse } from '@githubprimer/octicons-react'
-import  FaLineChart  from 'react-icons/lib/fa/line-chart';
+import Octicon, { Play, Home, Pulse } from '@githubprimer/octicons-react'
+import FaLineChart from 'react-icons/lib/fa/line-chart';
 import FaRocket from 'react-icons/lib/fa/rocket'
 
 
@@ -134,66 +134,98 @@ class HomePage extends Component {
                 <div className='component-header'>
                     <h4>Home <Octicon size={30} icon={Home} /></h4>
                 </div>
-                <a href='/trending'><h6 style={{ textAlign: 'left', padding: 50, paddingBottom: 0, color: 'rgb(59, 122, 40)' }}>Trending <FaLineChart /></h6></a>
-                {fetchingTrending ?
-                    <div style={{ width: '100%', marginTop: 100 }}>
-                        <ClipLoader
-                            sizeUnit={"px"}
-                            size={70}
-                            color={'#5B9716'}
-                        />
-                    </div> :
-                    <div className="movies-list">
-                        <PoseGroup animateOnMount>
-                            {(trendingMovies && trendingMovies.length) ? trendingMovies : <EmptyStatePage key="empty-page" message="No available movies" />}
-                        </PoseGroup>
+                <div className='home-div'>
+                    <div style={{ padding: 50, textAlign: 'left', paddingBottom: 0 }}>
+                        <a href='/trending' >
+                            <h6 style={{ display: 'inline', color: 'rgb(59, 122, 40)' }}>
+                                Trending <FaLineChart />
+                            </h6>
+                        </a>
                     </div>
-                }
-                <a href='/now-playing'><h6 style={{ textAlign: 'left', padding: 50, paddingBottom: 0, color: 'rgb(59, 122, 40)' }}>Now Playing <Octicon size={30} icon={Play} /></h6></a>
-                {fetchingNowPlaying ?
-                    <div style={{ width: '100%', marginTop: 100 }}>
-                        <ClipLoader
-                            sizeUnit={"px"}
-                            size={70}
-                            color={'#5B9716'}
-                        />
-                    </div> :
-                    <div className="movies-list">
-                        <PoseGroup animateOnMount>
-                            {(nowPlayingMovies && nowPlayingMovies.length) ? nowPlayingMovies : <EmptyStatePage key="empty-page" message="No available movies" />}
-                        </PoseGroup>
+                    {fetchingTrending ?
+                        <div style={{ width: '100%', marginTop: 100 }}>
+                            <ClipLoader
+                                sizeUnit={"px"}
+                                size={70}
+                                color={'#5B9716'}
+                            />
+                        </div> :
+                        <div className="movies-list">
+                            <PoseGroup animateOnMount>
+                                {(trendingMovies && trendingMovies.length) ? trendingMovies : <EmptyStatePage key="empty-page" message="No available movies" />}
+                            </PoseGroup>
+                        </div>
+                    }
+                </div>
+                <div className='home-div'>
+                    <div style={{ padding: 50, textAlign: 'left', paddingBottom: 0 }}>
+                        <a href='/now-playing'>
+                            <h6>
+                                Now Playing <Octicon size={30} icon={Play} />
+                            </h6>
+                        </a>
                     </div>
-                }
-                <a href='/upcoming'><h6 style={{ textAlign: 'left', padding: 50, paddingBottom: 0, color: 'rgb(59, 122, 40)' }}>Upcoming <FaRocket /></h6></a>
-                {fetchingUpcoming ?
-                    <div style={{ width: '100%', marginTop: 100 }}>
-                        <ClipLoader
-                            sizeUnit={"px"}
-                            size={70}
-                            color={'#5B9716'}
-                        />
-                    </div> :
-                    <div className="movies-list">
-                        <PoseGroup animateOnMount>
-                            {(upcomingMovies && upcomingMovies.length) ? upcomingMovies : <EmptyStatePage key="empty-page" message="No available movies" />}
-                        </PoseGroup>
+                    {fetchingNowPlaying ?
+                        <div style={{ width: '100%', marginTop: 100 }}>
+                            <ClipLoader
+                                sizeUnit={"px"}
+                                size={70}
+                                color={'#FFFFFF'}
+                            />
+                        </div> :
+                        <div className="movies-list">
+                            <PoseGroup animateOnMount>
+                                {(nowPlayingMovies && nowPlayingMovies.length) ? nowPlayingMovies : <EmptyStatePage key="empty-page" message="No available movies" />}
+                            </PoseGroup>
+                        </div>
+                    }
+                </div>
+                <div className='home-div'>
+                    <div style={{ padding: 50, textAlign: 'left', paddingBottom: 0 }}>
+                        <a href='/upcoming'>
+                            <h6 style={{ color: 'rgb(59, 122, 40)' }}>
+                                Upcoming <FaRocket />
+                            </h6>
+                        </a>
                     </div>
-                }
-                <a href='/popular'><h6 style={{ textAlign: 'left', padding: 50, paddingBottom: 0, color: 'rgb(59, 122, 40)' }}>Popular <Octicon size={30} icon={Pulse} /></h6></a>
-                {fetchingPopular ?
-                    <div style={{ width: '100%', marginTop: 100 }}>
-                        <ClipLoader
-                            sizeUnit={"px"}
-                            size={70}
-                            color={'#5B9716'}
-                        />
-                    </div> :
-                    <div className="movies-list">
-                        <PoseGroup animateOnMount>
-                            {(popularMovies && popularMovies.length) ? popularMovies : <EmptyStatePage key="empty-page" message="No available movies" />}
-                        </PoseGroup>
+                    {fetchingUpcoming ?
+                        <div style={{ width: '100%', marginTop: 100 }}>
+                            <ClipLoader
+                                sizeUnit={"px"}
+                                size={70}
+                                color={'#5B9716'}
+                            />
+                        </div> :
+                        <div className="movies-list">
+                            <PoseGroup animateOnMount>
+                                {(upcomingMovies && upcomingMovies.length) ? upcomingMovies : <EmptyStatePage key="empty-page" message="No available movies" />}
+                            </PoseGroup>
+                        </div>
+                    }
+                </div>
+                <div className='home-div'>
+                    <div style={{ padding: 50, textAlign: 'left', paddingBottom: 0 }}>
+                        <a href='/popular' style={{ width: '20%' }}>
+                            <h6>
+                                Popular <Octicon size={30} icon={Pulse} />
+                            </h6>
+                        </a>
                     </div>
-                }
+                    {fetchingPopular ?
+                        <div style={{ width: '100%', marginTop: 100 }}>
+                            <ClipLoader
+                                sizeUnit={"px"}
+                                size={70}
+                                color={'#FFFFFF'}
+                            />
+                        </div> :
+                        <div className="movies-list">
+                            <PoseGroup animateOnMount>
+                                {(popularMovies && popularMovies.length) ? popularMovies : <EmptyStatePage key="empty-page" message="No available movies" />}
+                            </PoseGroup>
+                        </div>
+                    }
+                </div>
             </React.Fragment>
         )
     }

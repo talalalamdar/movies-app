@@ -30,6 +30,8 @@ import FaTrophy from 'react-icons/lib/fa/trophy'
 import FaRocket from 'react-icons/lib/fa/rocket'
 import FaLineChart from 'react-icons/lib/fa/line-chart'
 
+import MdMovie from 'react-icons/lib/md/movie'
+
 class App extends Component {
 
   render() {
@@ -39,11 +41,11 @@ class App extends Component {
         <Router history={history}>
           <div>
             <div style={{ width: '100%', height: '100%', position: 'relative' }} className="header-img">
-              <img className="d-block w-100" style={{ position: 'absolute', width: '100%', height: '100%', top: 0, right: 0, filter: 'invert(1)' }} src={cinema2} alt='header-img' />
-              <div style={{ position: 'absolute', width: '100%', height: '100%', top: 0, right: 0, backgroundColor: 'rgba(0,0,0, 0.5)' }}>
+              <img className="d-block w-100" style={{ position: 'absolute', width: '100%', height: '100%', top: 0, right: 0 ,boxShadow: '2px 2px 5px 0px rgba(0,0,0,.5)'  }} src={cinema2} alt='header-img' />
+              <div style={{ position: 'absolute', width: '100%', height: '100%', top: 0, right: 0, backgroundColor: 'rgba(59, 122, 40, 0.8)' }}>
                 <img style={{ position: 'absolute', top: 8, right: 8 }} src={MovieDBLogo} alt='movie-db-logo' width={'5%'} />
                 <header className="App-header">
-                  <h1 className="App-title">Movies App </h1>
+                  <h1 className="App-title">Movies App <MdMovie /></h1>
                 </header>
               </div>
             </div>
