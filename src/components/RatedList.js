@@ -2,7 +2,7 @@ import React, { Component } from "react"
 import { connect } from "react-redux"
 import MovieItem from "./MovieItem"
 import EmptyStatePage from "./EmptyStatePage";
-import Octicon, { Star } from '@githubprimer/octicons-react'
+import Octicon, { Star } from '@primer/octicons-react'
 
 import Rating from 'react-rating'
 

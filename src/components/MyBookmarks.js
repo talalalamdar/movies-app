@@ -2,19 +2,10 @@ import React, { Component } from "react"
 import { connect } from "react-redux"
 import MovieItem from "./MovieItem"
 import EmptyStatePage from "./EmptyStatePage";
-import posed, { PoseGroup } from "react-pose";
 
 
-import Octicon, { Pin } from '@githubprimer/octicons-react';
+import Octicon, { Pin } from '@primer/octicons-react';
 
-
-const MovieContainer = posed.div({
-    enter: {
-        scale: 1,
-        delay: props => props.i * 100,
-    },
-    exit: { scale: 0 }
-});
 
 class MyBookmarks extends Component {
 
@@ -25,9 +16,9 @@ class MyBookmarks extends Component {
             const movies = favMovies.map((movie, i) => {
 
                 return movie.id && (
-                    <MovieContainer key={movie.id} i={i} className="movie-item">
+                    <div key={movie.id} className="movie-item">
                         <MovieItem movie={movie}  {...this.props} />
-                    </MovieContainer>
+                    </div>
                 )
             })
             return movies
@@ -42,9 +33,7 @@ class MyBookmarks extends Component {
                     <h4>My Bookmarks <Octicon size={30} icon={Pin}/></h4>
                 </div>
                 <div className="movies-list">
-                    <PoseGroup animateOnMount>
-                        {movies && movies.length ? movies : <EmptyStatePage key="empty-page" message="You have no bookmarked movies" />}
-                    </PoseGroup>
+                    {movies && movies.length ? movies : <EmptyStatePage key="empty-page" message="You have no bookmarked movies" />}
                 </div>
             </React.Fragment>
         )

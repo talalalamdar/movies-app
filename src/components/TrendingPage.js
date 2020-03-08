@@ -2,7 +2,6 @@ import React, { Component } from "react"
 import { connect } from "react-redux"
 import MovieItem from "./MovieItem"
 import EmptyStatePage from "./EmptyStatePage";
-import posed, { PoseGroup } from "react-pose";
 
 import { getTrendingMovies } from '../utils';
 import ClipLoader from 'react-spinners/ClipLoader';
@@ -10,13 +9,6 @@ import FaLineChart from 'react-icons/lib/fa/line-chart';
 
 import ReactPaginate from 'react-paginate';
 
-const MovieContainer = posed.div({
-    enter: {
-        scale: 1,
-        delay: props => props.i * 100,
-    },
-    exit: { scale: 0 }
-});
 
 class TrendingPage extends Component {
 
@@ -44,9 +36,9 @@ class TrendingPage extends Component {
         const { trendingMovies } = this.state
         if (trendingMovies.length > 0) {
             return trendingMovies.map((movie, i) =>
-                <MovieContainer key={movie.id} i={i} className="movie-item">
-                    <MovieItem movie={movie}  {...this.props} />
-                </MovieContainer>
+                <div key={movie.id} className="movie-item">
+                    <MovieItem movie={movie} {...this.props} />
+                </div>
             )
         }
     }
@@ -114,9 +106,7 @@ class TrendingPage extends Component {
                     </div> :
                     <div className="movies-list">
                         {this.displayPagination()}
-                        <PoseGroup animateOnMount>
-                            {(movies && movies.length) ? movies : <EmptyStatePage key="empty-page" message="No available movies" />}
-                        </PoseGroup>
+                        {(movies && movies.length) ? movies : <EmptyStatePage key="empty-page" message="No available movies" />}
                         {this.displayPagination()}
                     </div>
                 }

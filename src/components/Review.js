@@ -1,6 +1,6 @@
 import React from 'react'
 import { Collapse } from 'react-collapse';
-import Octicon, { ChevronDown, ChevronUp } from '@githubprimer/octicons-react'
+import Octicon, { ChevronDown, ChevronUp } from '@primer/octicons-react'
 
 
 
@@ -13,8 +13,12 @@ class Review extends React.Component {
         const { open } = this.state
 
         return (
-            <div key={review.id} style={{ borderBottom: '1px solid lightgray', padding: 20, fontSize: '18px' }}>
-                <strong>{review.author}</strong><br /><br />
+            <div key={review.id} className="review">
+                <strong style={{ opacity: '.5' }}>
+                    {review.author}
+                </strong>
+
+                <br /><br />
                 {!open && <p>{review.content.substr(0, 140)} ...</p>}
                 <Collapse isOpened={open}>
                     <p>

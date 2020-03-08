@@ -1,18 +1,10 @@
-import React, { Component } from "react"
-import { connect } from "react-redux"
-import MovieItem from "./MovieItem"
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import MovieItem from "./MovieItem";
 import EmptyStatePage from "./EmptyStatePage";
-import posed, { PoseGroup } from 'react-pose'
 
-import  Octicon, { Tasklist }  from '@githubprimer/octicons-react';
+import  Octicon, { Tasklist }  from '@primer/octicons-react';
 
-const MovieContainer = posed.div({
-    enter: {
-        scale: 1,
-        delay: props => props.i * 100,
-    },
-    exit: { scale: 0 }
-});
 
 class MyPlan extends Component {
 
@@ -22,9 +14,9 @@ class MyPlan extends Component {
         if (planMovies) {
             const movies = planMovies.map((movie, i) => {
                 return (
-                    <MovieContainer pose='enter' i={i} initialPose='exit' key={movie.id} className="movie-item">
+                    <div key={movie.id} className="movie-item">
                         <MovieItem movie={movie}  {...this.props}/>
-                    </MovieContainer>
+                    </div>
                 )
             })
             return movies
@@ -40,9 +32,7 @@ class MyPlan extends Component {
                     <h4>My Plan <Octicon size={30} icon={Tasklist}/></h4>
                 </div>
                 <div className="movies-list">
-                    <PoseGroup animateOnMount>
-                        {movies && movies.length ? movies : <EmptyStatePage key="empty-page" message="No movies currently in your plan" />}
-                    </PoseGroup>
+                    {movies && movies.length ? movies : <EmptyStatePage key="empty-page" message="No movies currently in your plan" />}
                 </div>
             </React.Fragment>
         )

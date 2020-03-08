@@ -2,16 +2,7 @@ import React, { Component } from "react"
 import { connect } from "react-redux"
 import MovieItem from "./MovieItem"
 import EmptyStatePage from "./EmptyStatePage";
-import posed, { PoseGroup } from "react-pose";
-import Octicon, { Check } from "@githubprimer/octicons-react";
-
-const MovieContainer = posed.div({
-    enter: {
-        scale: 1,
-        delay: props => props.i * 100,
-    },
-    exit: { scale: 0 }
-});
+import Octicon, { Check } from "@primer/octicons-react";
 
 class FinishedPage extends Component {
 
@@ -20,9 +11,9 @@ class FinishedPage extends Component {
         if (finishedMovies) {
             const movies = finishedMovies.map((movie, i) => {
                 return (
-                    <MovieContainer key={movie.id} i={i} className="movie-item">
+                    <div key={movie.id} className="movie-item">
                         <MovieItem movie={movie}  {...this.props} />
-                    </MovieContainer>
+                    </div>
                 )
             })
             return movies
@@ -37,9 +28,7 @@ class FinishedPage extends Component {
                     <h4>Finished Watching <Octicon size={30} icon={Check} /></h4>
                 </div>
                 <div className="movies-list">
-                    <PoseGroup animateOnMount>
-                        {movies && movies.length ? movies : <EmptyStatePage key="empty-page" message="Your finished list is empty movies!!" />}
-                    </PoseGroup>
+                    {movies && movies.length ? movies : <EmptyStatePage key="empty-page" message="Your finished list is empty movies!!" />}
                 </div>
             </React.Fragment>
         )

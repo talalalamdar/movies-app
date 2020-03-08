@@ -1,22 +1,13 @@
 import React, { Component } from "react"
 import { connect } from "react-redux"
 import MovieItem from "./MovieItem"
-import posed, { PoseGroup } from "react-pose";
 
 import { getPopularMovies } from '../utils';
 import ClipLoader from 'react-spinners/ClipLoader';
-import Octicon, { Pulse } from "@githubprimer/octicons-react";
+import Octicon, { Pulse } from "@primer/octicons-react";
 
 import ReactPaginate from 'react-paginate'
 
-
-const MovieContainer = posed.div({
-    enter: {
-        scale: 1,
-        delay: props => props.i * 100,
-    },
-    exit: { scale: 0 }
-});
 
 class PopularPage extends Component {
 
@@ -44,9 +35,9 @@ class PopularPage extends Component {
         const { popularMovies } = this.state
         if (popularMovies.length > 0) {
             return popularMovies.map((movie, i) =>
-                <MovieContainer key={movie.id} i={i} className="movie-item">
+                <div key={movie.id} className="movie-item">
                     <MovieItem movie={movie}  {...this.props} />
-                </MovieContainer>
+                </div>
             )
         }
     }
@@ -114,9 +105,7 @@ class PopularPage extends Component {
                     </div> :
                     <div className="movies-list">
                         {this.displayPagination()}
-                        <PoseGroup animateOnMount>
-                            {(movies && movies.length) && movies}
-                        </PoseGroup>
+                        {(movies && movies.length) && movies}
                         {this.displayPagination()}
 
                     </div>

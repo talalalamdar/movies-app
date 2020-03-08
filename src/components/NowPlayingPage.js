@@ -2,21 +2,12 @@ import React, { Component } from "react"
 import { connect } from "react-redux"
 import MovieItem from "./MovieItem"
 import EmptyStatePage from "./EmptyStatePage";
-import posed, { PoseGroup } from "react-pose";
 
 import { getNowPlayingMovies } from '../utils';
 import ClipLoader from 'react-spinners/ClipLoader';
-import Octicon, { Play } from "@githubprimer/octicons-react";
+import Octicon, { Play } from "@primer/octicons-react";
 
 import ReactPaginate from 'react-paginate'
-
-const MovieContainer = posed.div({
-    enter: {
-        scale: 1,
-        delay: props => props.i * 100,
-    },
-    exit: { scale: 0 }
-});
 
 class NowPlayingPage extends Component {
 
@@ -44,9 +35,9 @@ class NowPlayingPage extends Component {
         const { nowPlayingMovies } = this.state
         if (nowPlayingMovies.length > 0) {
             return nowPlayingMovies.map((movie, i) =>
-                <MovieContainer key={movie.id} i={i} className="movie-item">
+                <div key={movie.id} className="movie-item">
                     <MovieItem movie={movie}  {...this.props} />
-                </MovieContainer>
+                </div>
             )
         }
     }
@@ -113,9 +104,7 @@ class NowPlayingPage extends Component {
                     </div> :
                     <div className="movies-list">
                         {this.displayPagination()}
-                        <PoseGroup animateOnMount>
                             {(movies && movies.length) ? movies : <EmptyStatePage key="empty-page" message="No available movies" />}
-                        </PoseGroup>
                         {this.displayPagination()}
                     </div>
                 }

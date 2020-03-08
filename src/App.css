@@ -8,6 +8,20 @@ body {
   font-family: "Roboto", sans-serif !important;
 }
 
+.mainPage {
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+.mainPage-content {
+  flex-grow: 1;
+}
+
+.img-thumbnail {
+  padding: 0;
+  border: 0;
+}
+
 .App-header {
   margin: 50px;
   color: #fff;
@@ -22,19 +36,29 @@ body {
   height: 60px;
 }
 
-.header-img {
-  height: 200px !important;
+.header {
+  position: relative;
+  padding-top: 40%;
   z-index: 10;
+}
+
+.header-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .App-title {
   font-size: 2em;
 }
 
-.nav {
+.mainPage-nav {
   margin: 0px;
-  margin-top: 10px;
-  padding-top: 10px;
   background-color: rgb(240, 240, 240);
   position: sticky;
   top: 0px;
@@ -43,17 +67,20 @@ body {
   overflow: scroll;
   float: right;
   z-index: 10;
+
+  -webkit-box-shadow: 3px 0px 45px 10px rgba(0,0,0,0.33);
+  -moz-box-shadow: 3px 0px 45px 10px rgba(0,0,0,0.33);
+  box-shadow: 3px 0px 45px 10px rgba(0,0,0,.1);
 }
 
 .nav-item {
-  border-radius: 0%;
   z-index: 300;
   font-size: 15px;
 }
 
 .nav-link {
   border-radius: 0%;
-  padding: 20px;
+  padding: 5px 10px;
   color: rgb(187, 187, 187) !important;
 }
 
@@ -98,30 +125,44 @@ body {
 
 .movies-list {
   display: flex;
-  flex-flow: row wrap;
-  padding: 20px;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
+  flex-wrap: wrap;
+  padding: 20px;
 }
 
 .movie-item {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
-  margin: 25px 25px;
+  position: relative;
+  display: inline-block;
+  margin: 0 0 20px 0;
+  padding-top: 141%;
+  width: 100%;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   border-radius: 7px;
   cursor: pointer;
   overflow: hidden;
   z-index: 1;
-  transition: box-shadow 0.3s;
+  transition: transform 0.3s;
 }
 
 .movie-div {
-  position: relative;
-  height: 300px;
-  width: 200px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  height: 100%;
+  width: 100%;
+}
+
+.movie-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -10;
 }
 
 .bookmarked-item-icon {
@@ -136,17 +177,23 @@ body {
   padding: 5px;
 }
 
+.generalInfo-header {
+  display: flex;
+  align-items: center;
+  color: rgb(59, 122, 40);
+}
+
 .bookmarked-icon {
   color: rgb(59, 122, 40);
   display: inline-block;
-  padding: 10px;
+  padding: 0 0 10px 0;
   cursor: pointer;
 }
 
 .bookmark-icon {
   color: lightgray;
   display: inline-block;
-  padding: 10px;
+  padding: 0 0 10px 0;
   cursor: pointer;
 }
 
@@ -173,7 +220,6 @@ body {
   top: 0px;
   left: 0px;
   padding: 20px;
-  padding-top: 0px;
   color: white !important;
   opacity: 0.1;
 }
@@ -185,7 +231,7 @@ body {
 }
 
 .movie-item:hover {
-  box-shadow: 0 0px 0px 12px rgba(144, 247, 114, 0.3), 0 0px 0px 12px rgba(144, 247, 114, 0.3);
+  transform: translateY(-5px) !important;
 }
 
 .rate-start-icon {
@@ -225,7 +271,6 @@ body {
 }
 
 .details-div {
-  margin-top: 20px;
   text-align: left;
   font-size: 16px;
 }
@@ -241,6 +286,16 @@ body {
   padding: 20px;
   border-radius: 4px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.review {
+  padding-top: 20px;
+  border-bottom: 1px solid lightgray;
+  font-size: 18px;
+}
+
+.review:last-child {
+  border: none;
 }
 
 .recommended-movies-div {
@@ -271,6 +326,13 @@ body {
 .search-icon {
   position: relative;
   bottom: 3px;
+  margin-right: 8px;
+}
+
+.home-div-title {
+  display: flex;
+  width: 25%;
+  align-items: center;
 }
 
 .search-input {
@@ -284,16 +346,27 @@ body {
   padding: 8px;
   border-radius: 3px;
   margin-right: 10px;
+  width: 50%;
   transition: box-shadow 0.5s, border 0.5s;
 }
 
+.form-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.form-inner {
+  display: flex;
+  width: 100%;
+}
+
 .search-input:focus {
-  box-shadow: 0 0px 0px 4px rgb(59, 122, 40);
+  box-shadow: 0 0px 0px 2px rgb(59, 122, 40);
 }
 
 .search-btn {
-  height: 50px;
-  border-radius: 4px;
+  border-radius: 3px;
   vertical-align: bottom;
   margin-top: 20px;
   background-color: rgb(240, 240, 240);
@@ -301,15 +374,19 @@ body {
   border: 1px solid rgb(59, 122, 40);
   font-size: 18px;
   padding: 8px;
-  width: 200px;
+  width: 150px;
   font-weight: bold;
   transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+.form-totalResults {
+  opacity: .5;
 }
 
 .search-btn:hover {
   background-color: rgb(59, 122, 40);
   color: white;
-  box-shadow: 0 0px 0px 4px rgba(144, 247, 114);
+  box-shadow: 0 0px 0px 4px rgba(59, 122, 40, .3);
 }
 
 .search-btn:focus {
@@ -323,11 +400,28 @@ body {
 }
 
 .sidebar-overview {
-  width: 100%;
-  border-right: 1px solid lightgray;
   display: flex;
-  flex-direction: column;
+  width: 100%;
   align-items: center;
+  flex-direction: column;
+  padding: 0 20px 20px 20px;
+  border-right: 1px solid lightgray;
+}
+
+.sidebar-overview-header {
+  display: flex;
+  width: 100%;
+  flex-direction: row-reverse;
+}
+
+.sidebar-overview-moviePoster {
+  position: relative;
+  padding-top: 150%;
+  width: 100%;
+}
+
+.sidebar-overview-movie-rating {
+  display: flex !important;
 }
 
 .main-overview {
@@ -337,9 +431,17 @@ body {
 }
 
 .movie-poster {
-  width: 65%;
-  height: 500px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.main-overview-detailItem {
+  display: flex;
+  align-items: center;
 }
 
 .back-arrow {
@@ -361,7 +463,9 @@ body {
   cursor: pointer;
   border-radius: 3px;
   padding: 10px;
-  font-size: 18px;
+  font-size: 14px;
+  font-weight: 900;
+  text-transform: uppercase;
 }
 
 .option-div:hover {
@@ -445,7 +549,7 @@ body {
 
 .home-div {
   min-height: 50vh;
-  width: 95%;
+  width: 100%;
 }
 
 .home-div:nth-child(odd) {
@@ -490,24 +594,17 @@ a:hover {
 
 @media only screen and (min-width: 768px) {
   .nav-item {
-    width: 80px;
     font-size: 20px;
-    margin: 10px;
-    padding: 5px;
+    padding: 15px;
   }
   form {
     text-align: left;
-    padding-left: 100px;
   }
   .search-btn {
     margin-top: 0px;
   }
   .App-header {
     font-size: 4em;
-    margin: 150px;
-  }
-  .header-img {
-    height: 500px !important;
   }
   .component-header {
     padding: 15px 0px 8px 100px;
@@ -521,10 +618,16 @@ a:hover {
   .movie-details-div {
     padding: 20px;
   }
-  .movie-div {
-    height: 400px;
-    width: 300px;
+
+  .details-div {
+    font-size: 12px;
   }
+
+  .details-div-item {
+    display: flex;
+    align-items: center;
+  }
+
   .link-pagination {
     padding: 10px 14px;
   }
@@ -534,35 +637,54 @@ a:hover {
   .component-header > div > h4 {
     font-size: 25px;
   }
-  
+
   .component-header > h4 {
     font-size: 25px;
+  }
+
+  .movie-div {
+    font-size: 12px;
+  }
+
+  .movie-item {
+    position: relative;
+    display: inline-block;
+    margin: 15px;
+    padding-top: 42%;
+    width: 28%;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border-radius: 7px;
+    cursor: pointer;
+    overflow: hidden;
+    z-index: 1;
+    transition: transform 0.3s;
+  }
+
+  .nav-link {
+    padding: 15px;
+  }
+
+  .form-inner {
+    width: 50%;
   }
 }
 
 @media only screen and (min-width: 1024px) {
-  .nav {
-    /* padding-left: 200px; */
-  }
   .nav-item {
-    display: block;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
-  form {
-    text-align: left;
-    padding-left: 200px;
-  }
+
   .App-header {
     font-size: 4em;
-  }
-  .header-img {
-    height: 500px !important;
   }
   .search-input:focus {
     outline: none;
     border: none;
   }
   .component-header {
-    padding: 15px 0px 8px 170px;
+    padding: 15px 0px 8px 48px;
   }
   .sidebar-overview {
     width: 30%;
@@ -573,13 +695,22 @@ a:hover {
   .movie-details-div {
     padding: 100px;
   }
-  .movie-div {
-    height: 400px;
-    width: 300px;
-  }
+
   .App-title {
     font-size: 1em;
-      }
+  }
+
+  .movie-info {
+    font-size: 12px;
+  }
+
+  .movie-div {
+    font-size: 12px;
+  }
+
+  .nav-link {
+    padding: 20px;
+  }
 }
 
 @keyframes fadeIn {

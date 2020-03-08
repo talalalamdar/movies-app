@@ -1,7 +1,6 @@
 import React, { Component } from "react"
 import { connect } from "react-redux"
 import MovieItem from "./MovieItem"
-import posed, { PoseGroup } from "react-pose";
 
 import { getTopRatedMovies } from '../utils';
 import ClipLoader from 'react-spinners/ClipLoader';
@@ -9,15 +8,6 @@ import FaTrophy from 'react-icons/lib/fa/trophy';
 
 import ReactPaginate from 'react-paginate';
 
-
-
-const MovieContainer = posed.div({
-    enter: {
-        scale: 1,
-        delay: props => props.i * 100,
-    },
-    exit: { scale: 0 }
-});
 
 class TopRated extends Component {
 
@@ -45,9 +35,9 @@ class TopRated extends Component {
         const { topMovies } = this.state
         if (topMovies.length > 0) {
             return topMovies.map((movie, i) =>
-                <MovieContainer key={movie.id} i={i} className="movie-item">
+                <div key={movie.id} className="movie-item">
                     <MovieItem movie={movie}  {...this.props} />
-                </MovieContainer>
+                </div>
             )
         }
     }
@@ -94,7 +84,7 @@ class TopRated extends Component {
             </div>
         )
     }
-    
+
     render() {
         const { fetching } = this.state
         let movies = this.topRatedMoviesList()
@@ -114,9 +104,7 @@ class TopRated extends Component {
                     </div> :
                     <div className="movies-list">
                         {this.displayPagination()}
-                        <PoseGroup animateOnMount>
-                            {(movies && movies.length) && movies}
-                        </PoseGroup>
+                        {(movies && movies.length) && movies}
                         {this.displayPagination()}
                     </div>
                 }
