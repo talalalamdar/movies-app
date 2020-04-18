@@ -59,7 +59,7 @@ body {
 
 .mainPage-nav {
   margin: 0px;
-  background-color: rgb(240, 240, 240);
+  min-width: 58px;
   position: sticky;
   top: 0px;
   right: 0px;
@@ -67,6 +67,7 @@ body {
   overflow: scroll;
   float: right;
   z-index: 10;
+  background-color: rgb(240, 240, 240);
 
   -webkit-box-shadow: 3px 0px 45px 10px rgba(0,0,0,0.33);
   -moz-box-shadow: 3px 0px 45px 10px rgba(0,0,0,0.33);
@@ -103,7 +104,6 @@ body {
 .component-header {
   width: 100%;
   text-align: left;
-  padding: 15px 0px 8px 20px;
   position: sticky;
   top: 0px;
   z-index: 3;
@@ -405,7 +405,14 @@ body {
   align-items: center;
   flex-direction: column;
   padding: 0 20px 20px 20px;
-  border-right: 1px solid lightgray;
+}
+
+.sidebar-overview-panel {
+  display: flex;
+  justify-content: space-between;
+  flex-flow: row-reverse wrap;
+  width: 100%;
+  margin: 16px;
 }
 
 .sidebar-overview-header {
@@ -420,7 +427,7 @@ body {
   width: 100%;
 }
 
-.sidebar-overview-movie-rating {
+.sidebar-overview-panel-rating {
   display: flex !important;
 }
 
@@ -607,7 +614,7 @@ a:hover {
     font-size: 4em;
   }
   .component-header {
-    padding: 15px 0px 8px 100px;
+    padding: 16px 0px 8px 16px;
   }
   .sidebar-overview {
     width: 100%;
@@ -684,14 +691,28 @@ a:hover {
     border: none;
   }
   .component-header {
-    padding: 15px 0px 8px 48px;
+    padding: 15px 0px 8px 100px;
   }
+
   .sidebar-overview {
     width: 30%;
+    border-right: 1px solid lightgray;
   }
+
+  .sidebar-overview-panel {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .sidebar-overview-panel-rating {
+    margin-bottom: 16px;
+  }
+
   .main-overview {
     width: 70%;
   }
+
   .movie-details-div {
     padding: 100px;
   }

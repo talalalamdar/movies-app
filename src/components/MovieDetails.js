@@ -184,27 +184,30 @@ class MovieDetails extends Component {
             <img className="movie-poster" src={movie.poster_path ? `https://image.tmdb.org/t/p/w500${movie.poster_path}` : unavailablePoster} alt={`${movie.title}-movie`} />
           </div>
 
-          <Rating
-            style={{ marginTop: 30 }}
-            className="sidebar-overview-movie-rating"
-            initialRating={rate}
-            stop={10}
-            step={1}
-            fractions={2}
-            direction='ltr'
-            onClick={(val) => this.handleRatingClick(val)}
-            fullSymbol={<div style={{ color: 'gold' }}><Octicon icon={Star} size={25} /></div>}
-            emptySymbol={<div style={{ color: 'lightgray' }}><Octicon size={25} icon={Star} /></div>}
-          />
+          <div class="sidebar-overview-panel">
+            <Rating
+              style={{ marginTop: 30 }}
+              className="sidebar-overview-panel-rating"
+              initialRating={rate}
+              stop={10}
+              step={1}
+              fractions={2}
+              direction='ltr'
+              onClick={(val) => this.handleRatingClick(val)}
+              fullSymbol={<div style={{ color: 'gold' }}><Octicon icon={Star} size={25} /></div>}
+              emptySymbol={<div style={{ color: 'lightgray' }}><Octicon size={25} icon={Star} /></div>}
+            />
 
-          <strong style={{fontWeight: 'bolder', fontSize: '24px'}}>{rate}</strong>
+            <strong style={{fontWeight: 'bolder', fontSize: '24px'}}>{rate}</strong>
 
-          <div>
-            {!finished &&
-              <div className='option-div' style={{ backgroundColor: inMyPlan ? 'rgb(59, 122, 40)' : '', color: inMyPlan ? 'white' : '', border: inMyPlan ? 'none' : '', marginBottom: 8 }} onClick={() => (!inMyPlan || !finished) && this.handleAddToPlan(movie)}> {(inMyPlan) ? 'In my plan' : 'Add to plan'} </div>
-            }
-            <div className='option-div' style={{ backgroundColor: finished ? 'rgb(59, 122, 40)' : '', color: finished ? 'white' : '', border: finished ? 'none' : '' }} onClick={() => !finished && this.handleAddToFinishedList(movie)}> {finished ? 'Finished' : 'Add to finished list'} </div>
+            <div>
+              {!finished &&
+                <div className='option-div' style={{ backgroundColor: inMyPlan ? 'rgb(59, 122, 40)' : '', color: inMyPlan ? 'white' : '', border: inMyPlan ? 'none' : '', marginBottom: 8 }} onClick={() => (!inMyPlan || !finished) && this.handleAddToPlan(movie)}> {(inMyPlan) ? 'In my plan' : 'Add to plan'} </div>
+              }
+              <div className='option-div' style={{ backgroundColor: finished ? 'rgb(59, 122, 40)' : '', color: finished ? 'white' : '', border: finished ? 'none' : '' }} onClick={() => !finished && this.handleAddToFinishedList(movie)}> {finished ? 'Finished' : 'Add to finished list'} </div>
+            </div>
           </div>
+
         </div>
 
         <div className='main-overview'>

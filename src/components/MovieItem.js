@@ -139,7 +139,8 @@ class MovieItem extends Component {
 
 
     return (
-      <div
+      <a
+        href={`/movie/${this.props.movie.id}`}
         pose='open'
         className='movie-div'
         onMouseEnter={() => this.handleMouseHover(true)}
@@ -164,7 +165,7 @@ class MovieItem extends Component {
               </div>
             </div>
 
-            <a href={`/movie/${this.props.movie.id}`} style={{ height: '100%', width: '100%' }} onClick={() => this.goToMovie()} >
+            <div style={{ height: '100%', width: '100%' }} onClick={() => this.goToMovie()} >
               <h6>{title.length > 35 ? title.substr(0, 35) + "..." : title}</h6>
 
               <div  className="details-div">
@@ -185,7 +186,7 @@ class MovieItem extends Component {
                   <strong style={{ padding: 5 }}>{release_date && release_date}</strong>
                 </div>
               </div>
-            </a>
+            </div>
 
             {showOptionsMenu &&
               <div className="buttons-div">
@@ -227,7 +228,7 @@ class MovieItem extends Component {
             </Button>
           </Modal.Footer>
         </Modal>
-      </div>
+      </a>
     )
   }
 

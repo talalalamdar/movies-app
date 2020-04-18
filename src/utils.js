@@ -6,7 +6,7 @@ const BASE_URL_TRENDING = 'https://api.themoviedb.org/3/trending'
 
 
 export const searchMovies = async (query, pageNum) => {
-    let movies = fetch(`${BASE_SEARCH_URL}?query=${query}&api_key=${APIKEY.key}&page=${pageNum}`)
+    const movies = fetch(`${BASE_SEARCH_URL}?query=${query}&api_key=${APIKEY.key}&page=${pageNum}`)
         .then(res => res.json())
         .catch(err => console.log(err))
 
@@ -15,7 +15,7 @@ export const searchMovies = async (query, pageNum) => {
 
 
 export const getMovie = async (movieId) => {
-    let movies = fetch(`${BASE_MOVIE_URL}/${movieId}?api_key=${APIKEY.key}`)
+    const movies = fetch(`${BASE_MOVIE_URL}/${movieId}?api_key=${APIKEY.key}`)
         .then(res => res.json())
         .catch(err => console.log(err))
 
@@ -23,7 +23,7 @@ export const getMovie = async (movieId) => {
 }
 
 export const getReviews = async (movieId) => {
-    let movies = fetch(`${BASE_MOVIE_URL}/${movieId}/reviews?api_key=${APIKEY.key}`)
+    const movies = fetch(`${BASE_MOVIE_URL}/${movieId}/reviews?api_key=${APIKEY.key}`)
         .then(res => res.json())
         .catch(err => console.log(err))
 
@@ -31,7 +31,7 @@ export const getReviews = async (movieId) => {
 }
 
 export const getSimilarMovies = async (movieId) => {
-    let movies = fetch(`${BASE_MOVIE_URL}/${movieId}/similar?api_key=${APIKEY.key}`)
+    const movies = fetch(`${BASE_MOVIE_URL}/${movieId}/similar?api_key=${APIKEY.key}`)
         .then(res => res.json())
         .catch(err => console.log(err))
 
@@ -39,7 +39,7 @@ export const getSimilarMovies = async (movieId) => {
 }
 
 export const getNowPlayingMovies = async (pageNum) => {
-    let movies = fetch(`${BASE_MOVIE_URL}/now_playing?api_key=${APIKEY.key}&page=${pageNum}`)
+    const movies = fetch(`${BASE_MOVIE_URL}/now_playing?api_key=${APIKEY.key}&page=${pageNum}`)
         .then(res => res.json())
         .catch(err => console.log(err))
 
@@ -47,7 +47,7 @@ export const getNowPlayingMovies = async (pageNum) => {
 }
 
 export const getTopRatedMovies = async (pageNum) => {
-    let movies = fetch(`${BASE_MOVIE_URL}/top_rated?api_key=${APIKEY.key}&page=${pageNum}`)
+    const movies = fetch(`${BASE_MOVIE_URL}/top_rated?api_key=${APIKEY.key}&page=${pageNum}`)
         .then(res => res.json())
         .catch(err => console.log(err))
 
@@ -55,7 +55,7 @@ export const getTopRatedMovies = async (pageNum) => {
 }
 
 export const getUpcomingMovies = async (pageNum) => {
-    let movies = fetch(`${BASE_MOVIE_URL}/upcoming?api_key=${APIKEY.key}&page=${pageNum}`)
+    const movies = fetch(`${BASE_MOVIE_URL}/upcoming?api_key=${APIKEY.key}&page=${pageNum}`)
         .then(res => res.json())
         .catch(err => console.log(err))
 
@@ -63,7 +63,7 @@ export const getUpcomingMovies = async (pageNum) => {
 }
 
 export const getRecommendedMovies = async (movieId) => {
-    let movies = fetch(`${BASE_MOVIE_URL}/${movieId}/recommendations?api_key=${APIKEY.key}`)
+    const movies = fetch(`${BASE_MOVIE_URL}/${movieId}/recommendations?api_key=${APIKEY.key}`)
         .then(res => res.json())
         .catch(err => console.log(err))
 
@@ -71,7 +71,7 @@ export const getRecommendedMovies = async (movieId) => {
 }
 
 export const getPopularMovies = async (pageNum) => {
-    let movies = fetch(`${BASE_MOVIE_URL}/popular?api_key=${APIKEY.key}&page=${pageNum}`)
+    const movies = fetch(`${BASE_MOVIE_URL}/popular?api_key=${APIKEY.key}&page=${pageNum}`)
         .then(res => res.json())
         .catch(err => console.log(err))
 
@@ -79,7 +79,7 @@ export const getPopularMovies = async (pageNum) => {
 }
 
 export const getTrendingMovies = async (pageNum) => {
-    let movies = fetch(`${BASE_URL_TRENDING}/movie/week?api_key=${APIKEY.key}&page=${pageNum}`)
+    const movies = fetch(`${BASE_URL_TRENDING}/movie/week?api_key=${APIKEY.key}&page=${pageNum}`)
         .then(res => res.json())
         .catch(err => console.log(err))
 

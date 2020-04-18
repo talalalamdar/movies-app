@@ -24,7 +24,8 @@ class SearchPage extends Component {
   state = {
     fetching: false,
     pagesNum: 1,
-    totalResults: 0
+    totalResults: 0,
+    selectedPage: 0,
   }
 
   handleInputChange = (val) => {
@@ -37,14 +38,15 @@ class SearchPage extends Component {
     if (searchQuery.length > 0) {
       this.setState({ fetching: true }, () => {
         const { searchQuery } = this.props.searchReducer
-        if (searchQuery.length < 1) {
-          this.setState({ fetching: false })
-          return
-        }
         searchMovies(searchQuery, 1)
           .then(result => {
             this.props.fetchMovies(result.results)
-            this.setState({ fetching: false, pagesNum: result.total_pages, totalResults: result.total_results })
+            this.setState({
+              fetching: false,
+              pagesNum: result.total_pages,
+              totalResults: result.total_results,
+              selectedPage: result.page - 1,
+            })
             let searchDiv = document.getElementById('scroll-to-submit')
             searchDiv.scrollIntoView({ behavior: 'smooth', top: '1px', block: "start", inline: 'start', alignToTop: true })
           })
@@ -65,7 +67,12 @@ class SearchPage extends Component {
       searchMovies(searchQuery, 1)
         .then(result => {
           this.props.fetchMovies(result.results)
-          this.setState({ fetching: false, pagesNum: result.total_pages, totalResults: result.total_results })
+          this.setState({
+            fetching: false,
+            pagesNum: result.total_pages,
+            totalResults: result.total_results,
+            selectedPage: result.page - 1,
+          })
           let searchDiv = document.getElementById('scroll-to-submit')
           searchDiv.scrollIntoView({ behavior: 'smooth', top: '1px', block: "start", inline: 'start', alignToTop: true })
         })
@@ -98,7 +105,7 @@ class SearchPage extends Component {
       .then(result => {
         this.props.fetchMovies([])
         this.props.fetchMovies(result.results)
-        this.setState({ fetching: false })
+        this.setState({ fetching: false, selectedPage: result.page - 1 })
         let searchDiv = document.getElementById('scroll-to-submit')
         searchDiv.scrollIntoView({ behavior: 'smooth', top: '1px', block: "start", inline: 'start', alignToTop: true })
       })
@@ -129,6 +136,7 @@ class SearchPage extends Component {
           nextLinkClassName={'link-pagination'}
           previousClassName={'page-pagination'}
           nextClassName={'page-pagination'}
+          forcePage={this.state.selectedPage}
         />
       </div>
     )
