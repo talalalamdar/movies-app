@@ -184,7 +184,7 @@ class MovieDetails extends Component {
             <img className="movie-poster" src={movie.poster_path ? `https://image.tmdb.org/t/p/w500${movie.poster_path}` : unavailablePoster} alt={`${movie.title}-movie`} />
           </div>
 
-          <div class="sidebar-overview-panel">
+          <div className="sidebar-overview-panel">
             <Rating
               style={{ marginTop: 30 }}
               className="sidebar-overview-panel-rating"

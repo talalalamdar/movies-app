@@ -14,15 +14,19 @@ class RatedList extends Component {
         if (ratedListMovies) {
             const movies = ratedListMovies.map((movie, i) => {
                 return movie.movie && movie.movie.id && (
-                    <div style={{ display: 'flex', justifyContent: 'center', flexDirection: 'column' }} key={movie.movie.id} >
+                    <div className="rated-movie-item" key={movie.movie.id} >
                         <div className="movie-item">
                             <MovieItem movie={movie.movie}  {...this.props} />
                         </div>
-                        <div>
-                            <Rating style={{ marginTop: 10 }} initialRating={movie.value} readonly stop={10} step={1} fractions={2}
-                                fullSymbol={<div style={{ color: 'gold' }}><Octicon icon={Star} size={30} /></div>}
-                                emptySymbol={<div style={{ color: 'lightgray' }}><Octicon size={30} icon={Star} /></div>}
-                            /> {movie.value}
+                        <div className="movie-item-rating">
+                            <Rating style={{ marginTop: 10 }} initialRating={movie.value} start={1} stop={2} fractions={2}
+                                fullSymbol={<div style={{ color: 'gold' }}><Octicon icon={Star} size={60} /></div>}
+                                emptySymbol={<div style={{ color: 'lightgray' }}><Octicon size={60} icon={Star} /></div>}
+                            />
+
+                            <span className="movie-item-rating-value">
+                                {movie.value}
+                            </span>
                         </div>
                     </div>
 
@@ -30,17 +34,20 @@ class RatedList extends Component {
             })
             return movies
         }
+
+        return []
     }
 
     render() {
         const ratedList = this.ratedList()
+
         return (
             <React.Fragment>
                 <div className='component-header'>
                     <h4>My Ratings <Octicon size={30} icon={Star}/></h4>
                 </div>
                 <div className="movies-list">
-                    {ratedList && ratedList.length ? ratedList : <EmptyStatePage message="No movies in your rated list :(" />}
+                    {ratedList.length ? ratedList : <EmptyStatePage message="No movies in your rated list :(" />}
                 </div>
             </React.Fragment>
         )
