@@ -14,7 +14,8 @@ class PopularPage extends Component {
     state = {
         fetching: true,
         popularMovies: [],
-        pagesNum: 1
+        pagesNum: 1,
+        selectedPage: 0
     }
 
     componentDidMount() {
@@ -49,7 +50,8 @@ class PopularPage extends Component {
                     this.setState({
                         fetching: false,
                         popularMovies: res.results,
-                        pagesNum: res.total_pages
+                        pagesNum: res.total_pages,
+                        selectedPage: res.page - 1,
                     })
                 }
             })
@@ -81,6 +83,7 @@ class PopularPage extends Component {
                     nextLinkClassName={'link-pagination'}
                     previousClassName={'page-pagination'}
                     nextClassName={'page-pagination'}
+                    forcePage={this.state.selectedPage}
                 />
             </div>
         )

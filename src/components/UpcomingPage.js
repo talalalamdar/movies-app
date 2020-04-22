@@ -16,7 +16,8 @@ class UpcomingPage extends Component {
     state = {
         fetching: true,
         upcomingMovies: [],
-        pageNum: 1
+        pageNum: 1,
+        selectedPage: 0
     }
 
     componentDidMount() {
@@ -51,6 +52,7 @@ class UpcomingPage extends Component {
                     this.setState({
                         fetching: false,
                         upcomingMovies: res.results,
+                        selectedPage: res.page - 1,
                     })
                 }
             })
@@ -82,6 +84,7 @@ class UpcomingPage extends Component {
                     nextLinkClassName={'link-pagination'}
                     previousClassName={'page-pagination'}
                     nextClassName={'page-pagination'}
+                    forcePage={this.state.selectedPage}
                 />
             </div>
         )

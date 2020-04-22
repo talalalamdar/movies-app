@@ -14,7 +14,8 @@ class TopRated extends Component {
     state = {
         fetching: true,
         topMovies: [],
-        pageNum: 1
+        pageNum: 1,
+        selectedPage: 0,
     }
 
     componentDidMount() {
@@ -49,6 +50,7 @@ class TopRated extends Component {
                     this.setState({
                         fetching: false,
                         topMovies: res.results,
+                        selectedPage: res.page - 1,
                     })
                 }
             })
@@ -80,6 +82,7 @@ class TopRated extends Component {
                     nextLinkClassName={'link-pagination'}
                     previousClassName={'page-pagination'}
                     nextClassName={'page-pagination'}
+                    forcePage={this.state.selectedPage}
                 />
             </div>
         )
