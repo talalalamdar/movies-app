@@ -1,7 +1,6 @@
 import React, { Component } from "react"
 import { connect } from "react-redux"
 import MovieItem from "./MovieItem"
-import EmptyStatePage from "./EmptyStatePage";
 
 import { getTrendingMovies, getNowPlayingMovies, getUpcomingMovies, getPopularMovies } from '../utils';
 import ClipLoader from 'react-spinners/ClipLoader';
@@ -10,6 +9,7 @@ import Octicon, { Play, Home, Pulse } from '@primer/octicons-react'
 import FaLineChart from 'react-icons/lib/fa/line-chart';
 import FaRocket from 'react-icons/lib/fa/rocket'
 
+import { CarouselProvider, Slider, Slide, ButtonBack, ButtonNext, Dot } from 'pure-react-carousel'
 
 class HomePage extends Component {
   state = {
@@ -69,10 +69,13 @@ class HomePage extends Component {
   trendingMoviesList = () => {
     const { trendingMovies } = this.state
     if (trendingMovies.length > 0) {
-      return trendingMovies.map((movie, i) => i < 10 &&
-        <div key={movie.id} className="movie-item">
-          <MovieItem movie={movie} {...this.props} />
-        </div>
+      return trendingMovies.map((movie, i) => {
+        return (
+          <Slide index={i} key={movie.id} className="carousel__movie-item">
+             <MovieItem movie={movie} {...this.props} />
+          </Slide>
+        )
+      }
       )
     }
   }
@@ -80,10 +83,10 @@ class HomePage extends Component {
   nowPlayingMoviesList = () => {
     const { nowPlayingMovies } = this.state
     if (nowPlayingMovies.length > 0) {
-      return nowPlayingMovies.map((movie, i) => i < 10 &&
-      <div key={movie.id} className="movie-item">
-        <MovieItem  movie={movie} {...this.props} />
-      </div>
+      return nowPlayingMovies.map((movie, i) =>
+        <Slide index={i} key={movie.id} className="carousel__movie-item">
+          <MovieItem  movie={movie} {...this.props} />
+        </Slide>
       )
     }
   }
@@ -91,10 +94,10 @@ class HomePage extends Component {
   upcomingMoviesList = () => {
     const { upcomingMovies } = this.state
     if (upcomingMovies.length > 0) {
-      return upcomingMovies.map((movie, i) => i < 10 &&
-      <div key={movie.id} className="movie-item">
-        <MovieItem movie={movie} {...this.props} />
-      </div>
+      return upcomingMovies.map((movie, i) =>
+        <Slide index={i} key={movie.id} className="carousel__movie-item">
+          <MovieItem movie={movie} {...this.props} />
+        </Slide>
       )
     }
   }
@@ -102,10 +105,10 @@ class HomePage extends Component {
   popularMoviesList = () => {
     const { popularMovies } = this.state
     if (popularMovies.length > 0) {
-      return popularMovies.map((movie, i) => i < 10 &&
-      <div key={movie.id} className="movie-item">
-        <MovieItem movie={movie} {...this.props} />
-      </div>
+      return popularMovies.map((movie, i) =>
+        <Slide index={i} key={movie.id} className="carousel__movie-item">
+          <MovieItem movie={movie} {...this.props} />
+        </Slide>
       )
     }
   }
@@ -130,7 +133,7 @@ class HomePage extends Component {
         </div>
 
         <div className='home-div'>
-          <div style={{ padding: 50, textAlign: 'left', paddingBottom: 0 }}>
+          <div style={{ padding: 16, textAlign: 'left' }}>
             <a href='/trending' >
               <div className="home-div-title" style={{ display: 'inline', color: 'rgb(59, 122, 40)' }}>
                 <FaLineChart style={{ marginRight: 8}} /> Trending
@@ -145,14 +148,35 @@ class HomePage extends Component {
                 color={'#5B9716'}
               />
             </div> :
-            <div className="movies-list">
-              {(trendingMovies && trendingMovies.length) ? trendingMovies : <EmptyStatePage key="empty-page" message="No available movies" />}
-            </div>
+            <CarouselProvider
+              naturalSlideWidth={75}
+              naturalSlideHeight={125}
+              totalSlides={this.state.trendingMovies.length}
+              visibleSlides={5}
+              infinite={true}
+              step={2}
+            >
+              <Slider>
+                { trendingMovies }
+              </Slider>
+
+              <div className="carousel__control">
+                <ButtonBack className="carousel__control_navigateButton"> {'<'} </ButtonBack>
+
+                <div className="carousel__control_dotGroup">
+                  {trendingMovies.map((movie, i) => {
+                    return <Dot key={movie.id} slide={i} />
+                  })}
+                </div>
+
+                <ButtonNext className="carousel__control_navigateButton"> > </ButtonNext>
+              </div>
+            </CarouselProvider>
           }
         </div>
 
         <div className='home-div'>
-          <div style={{ padding: 50, textAlign: 'left', paddingBottom: 0 }}>
+          <div style={{ padding: 16, textAlign: 'left'}}>
             <a href='/now-playing'>
               <div className="home-div-title">
                 <div style={{ marginRight: '8px'}}>
@@ -171,14 +195,35 @@ class HomePage extends Component {
                 color={'#FFFFFF'}
               />
             </div> :
-            <div className="movies-list">
-              {(nowPlayingMovies && nowPlayingMovies.length) ? nowPlayingMovies : <EmptyStatePage key="empty-page" message="No available movies" />}
-            </div>
+            <CarouselProvider
+              naturalSlideWidth={75}
+              naturalSlideHeight={125}
+              totalSlides={this.state.nowPlayingMovies.length}
+              visibleSlides={5}
+              infinite={true}
+              step={2}
+            >
+              <Slider>
+                { nowPlayingMovies }
+              </Slider>
+
+              <div className="carousel__control">
+                <ButtonBack className="carousel__control_navigateButton _white_color"> {'<'} </ButtonBack>
+
+                <div className="carousel__control_dotGroup">
+                  {nowPlayingMovies.map((movie, i) => {
+                    return <Dot key={movie.id} slide={i} className="_white_background"/>
+                  })}
+                </div>
+
+                <ButtonNext className="carousel__control_navigateButton _white_color"> > </ButtonNext>
+              </div>
+            </CarouselProvider>
           }
         </div>
 
         <div className='home-div'>
-          <div style={{ padding: 50, textAlign: 'left', paddingBottom: 0 }}>
+          <div style={{ padding: 16, textAlign: 'left' }}>
             <a href='/upcoming'>
               <div className="home-div-title" style={{ color: 'rgb(59, 122, 40)' }}>
                 <FaRocket style={{ marginRight: 8}} /> Upcoming
@@ -193,14 +238,35 @@ class HomePage extends Component {
                 color={'#5B9716'}
               />
             </div> :
-            <div className="movies-list">
-              {(upcomingMovies && upcomingMovies.length) ? upcomingMovies : <EmptyStatePage key="empty-page" message="No available movies" />}
-            </div>
+            <CarouselProvider
+              naturalSlideWidth={75}
+              naturalSlideHeight={125}
+              totalSlides={this.state.upcomingMovies.length}
+              visibleSlides={5}
+              infinite={true}
+              step={2}
+            >
+              <Slider>
+                { upcomingMovies }
+              </Slider>
+
+              <div className="carousel__control">
+                <ButtonBack className="carousel__control_navigateButton"> {'<'} </ButtonBack>
+
+                <div className="carousel__control_dotGroup">
+                  {upcomingMovies.map((movie, i) => {
+                    return <Dot key={movie.id} slide={i} />
+                  })}
+                </div>
+
+                <ButtonNext className="carousel__control_navigateButton"> > </ButtonNext>
+              </div>
+            </CarouselProvider>
           }
         </div>
 
         <div className='home-div'>
-          <div style={{ padding: 50, textAlign: 'left', paddingBottom: 0 }}>
+          <div style={{ padding: 16, textAlign: 'left' }}>
             <a href='/popular' style={{ width: '20%' }}>
               <div className="home-div-title">
                 <div style={{ marginRight: 8 }}>
@@ -219,9 +285,30 @@ class HomePage extends Component {
                 color={'#FFFFFF'}
               />
             </div> :
-            <div className="movies-list">
-              {(popularMovies && popularMovies.length) ? popularMovies : <EmptyStatePage key="empty-page" message="No available movies" />}
-            </div>
+            <CarouselProvider
+              naturalSlideWidth={75}
+              naturalSlideHeight={125}
+              totalSlides={popularMovies.length}
+              visibleSlides={5}
+              infinite={true}
+              step={2}
+            >
+              <Slider>
+                {popularMovies}
+              </Slider>
+
+              <div className="carousel__control">
+                <ButtonBack className="carousel__control_navigateButton _white_color"> {'<'} </ButtonBack>
+
+                <div className="carousel__control_dotGroup">
+                  {popularMovies.map((movie, i) => {
+                    return <Dot key={movie.id} slide={i} className="_white_background"/>
+                  })}
+                </div>
+
+                <ButtonNext className="carousel__control_navigateButton _white_color"> > </ButtonNext>
+              </div>
+            </CarouselProvider>
           }
         </div>
       </React.Fragment>

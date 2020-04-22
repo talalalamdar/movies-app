@@ -165,7 +165,7 @@ class MovieItem extends Component {
               </div>
             </div>
 
-            <div style={{ height: '100%', width: '100%' }} onClick={() => this.goToMovie()} >
+            <div style={{ height: '100%', width: '100%' }}>
               <h6>{title.length > 35 ? title.substr(0, 35) + "..." : title}</h6>
 
               <div  className="details-div">

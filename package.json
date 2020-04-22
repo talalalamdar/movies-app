@@ -13,6 +13,7 @@
     "i": "^0.3.6",
     "npm": "^6.4.1",
     "numeral": "^2.0.6",
+    "pure-react-carousel": "^1.27.0",
     "qs": "^6.7.0",
     "react": "^16.8.6",
     "react-bootstrap": "^1.0.0-beta.5",
