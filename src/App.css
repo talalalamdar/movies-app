@@ -37,6 +37,8 @@ body {
 }
 
 .header {
+  width: 100vw;
+  height: 100vh;
   position: relative;
   padding-top: 40%;
   z-index: 10;
