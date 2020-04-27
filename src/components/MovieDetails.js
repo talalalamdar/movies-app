@@ -259,7 +259,7 @@ class MovieDetails extends Component {
             <MdInfo style={{ marginRight: '8px'}}/> General Info
           </div>
 
-          <div style={{ fontSize: 18, padding: 20 }}>
+          <div className="generalInfo-container">
             {movie.homepage &&
               <span><strong>Home Page: </strong><a style={{ color: 'blue' }} target='__blank' href={movie.homepage}>{movie.homepage}</a><br /></span>
             }
@@ -343,7 +343,7 @@ class MovieDetails extends Component {
     return (
       <React.Fragment>
         <div className='component-header'>
-          <div style={{ display: 'flex' }}>
+          <div style={{ display: 'flex', alignItems: 'center' }}>
             <div className='back-arrow' title='Go back' onClick={() => this.props.history.goBack()}>
               <Octicon verticalAlign='text-bottom' size={35} icon={ArrowLeft} />
             </div>

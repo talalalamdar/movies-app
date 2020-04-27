@@ -14,7 +14,7 @@ body {
 }
 
 .mainPage-content {
-  flex-grow: 1;
+  width: calc(100% - 58px);
 }
 
 .img-thumbnail {
@@ -108,6 +108,7 @@ body {
   text-align: left;
   position: sticky;
   top: 0px;
+  padding: 8px;
   z-index: 3;
   background-color: rgb(240, 240, 240);
   box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.1), 0 1px 1px 0 rgba(0, 0, 0, 0.1);
@@ -183,6 +184,14 @@ body {
   display: flex;
   align-items: center;
   color: rgb(59, 122, 40);
+}
+
+.generalInfo-container {
+  font-size: 18px;
+  padding: 20px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .bookmarked-icon {
@@ -312,6 +321,7 @@ body {
   padding-top: 20px;
   border-bottom: 1px solid lightgray;
   font-size: 18px;
+  overflow: hidden;
 }
 
 .review:last-child {
@@ -351,7 +361,6 @@ body {
 
 .home-div-title {
   display: flex;
-  width: 25%;
   align-items: center;
 }
 
@@ -366,7 +375,6 @@ body {
   padding: 8px;
   border-radius: 3px;
   margin-right: 10px;
-  width: 50%;
   transition: box-shadow 0.5s, border 0.5s;
 }
 
@@ -374,10 +382,12 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-direction: column;
 }
 
 .form-inner {
   display: flex;
+  flex-direction: column;
   width: 100%;
 }
 
@@ -394,12 +404,12 @@ body {
   border: 1px solid rgb(59, 122, 40);
   font-size: 18px;
   padding: 8px;
-  width: 150px;
   font-weight: bold;
   transition: background-color 0.3s, box-shadow 0.3s;
 }
 
 .form-totalResults {
+  margin-top: 8px;
   opacity: .5;
 }
 
@@ -429,16 +439,17 @@ body {
 
 .sidebar-overview-panel {
   display: flex;
-  justify-content: space-between;
-  flex-flow: row-reverse wrap;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   width: 100%;
-  margin: 16px;
 }
 
 .sidebar-overview-header {
   display: flex;
   width: 100%;
   flex-direction: row-reverse;
+  padding-top: 8px;
 }
 
 .sidebar-overview-moviePoster {
@@ -449,12 +460,12 @@ body {
 
 .sidebar-overview-panel-rating {
   display: flex !important;
+  margin-bottom: 16px;
 }
 
 .main-overview {
-  width: 100%;
+  width: calc(100% - 58px);
   text-align: left;
-  padding-left: 50px;
 }
 
 .movie-poster {
@@ -486,7 +497,6 @@ body {
   width: 100%;
   border: 2px solid lightgray;
   color: gray;
-  margin: 5px;
   cursor: pointer;
   border-radius: 3px;
   padding: 10px;
@@ -640,7 +650,8 @@ a:hover {
     width: 100%;
   }
   .main-overview {
-    width: 100%;
+    width: calc(100% - 58px);
+    padding-left: 50px;
   }
   .movie-details-div {
     padding: 20px;
@@ -673,6 +684,22 @@ a:hover {
     font-size: 12px;
   }
 
+  .form-wrapper {
+    flex-direction: row;
+  }
+
+  .form-totalResults {
+    margin-top: 0px;
+  }
+
+  .search-input {
+    flex-grow: 2;
+  }
+
+  .search-btn {
+    flex-grow: 1;
+  }
+
   .movie-item {
     position: relative;
     display: inline-block;
@@ -692,6 +719,7 @@ a:hover {
   }
 
   .form-inner {
+    flex-direction: row;
     width: 50%;
   }
 }
@@ -717,16 +745,6 @@ a:hover {
   .sidebar-overview {
     width: 30%;
     border-right: 1px solid lightgray;
-  }
-
-  .sidebar-overview-panel {
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
-
-  .sidebar-overview-panel-rating {
-    margin-bottom: 16px;
   }
 
   .main-overview {

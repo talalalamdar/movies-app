@@ -20,7 +20,13 @@ class HomePage extends Component {
     fetchingUpcoming: true,
     upcomingMovies: [],
     fetchingPopular: true,
-    popularMovies: []
+    popularMovies: [],
+    responsiveConfig: {
+      visibleSlides: 5,
+      step: 2,
+      width: 0,
+      height: 0
+    },
   }
 
   componentDidMount() {
@@ -64,6 +70,13 @@ class HomePage extends Component {
         }
       })
       .catch(err => console.log(err))
+
+    this.handleVisibleSlides();
+    window.addEventListener("resize", this.handleVisibleSlides);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener("resize", this.handleVisibleSlides);
   }
 
   trendingMoviesList = () => {
@@ -113,8 +126,22 @@ class HomePage extends Component {
     }
   }
 
+  handleVisibleSlides = () => {
+    const isMobileView = window.innerWidth < 800;
+    const config = {
+      width: isMobileView ? 60 : 75 ,
+      height: isMobileView ? 80 : 125,
+      step: isMobileView ? 1 : 2,
+      visibleSlides: isMobileView ? 1 : 5
+    }
+
+    this.setState({
+      responsiveConfig: config,
+    })
+  }
+
   render() {
-    const { fetchingTrending, fetchingNowPlaying, fetchingUpcoming, fetchingPopular } = this.state
+    const { fetchingTrending, fetchingNowPlaying, fetchingUpcoming, fetchingPopular, responsiveConfig } = this.state
     let trendingMovies = this.trendingMoviesList()
     let nowPlayingMovies = this.nowPlayingMoviesList()
     let upcomingMovies = this.upcomingMoviesList()
@@ -149,12 +176,12 @@ class HomePage extends Component {
               />
             </div> :
             <CarouselProvider
-              naturalSlideWidth={75}
-              naturalSlideHeight={125}
               totalSlides={this.state.trendingMovies.length}
-              visibleSlides={5}
+              naturalSlideWidth={responsiveConfig.width}
+              naturalSlideHeight={responsiveConfig.height}
+              visibleSlides={responsiveConfig.visibleSlides}
               infinite={true}
-              step={2}
+              step={responsiveConfig.step}
             >
               <Slider>
                 { trendingMovies }
@@ -196,12 +223,12 @@ class HomePage extends Component {
               />
             </div> :
             <CarouselProvider
-              naturalSlideWidth={75}
-              naturalSlideHeight={125}
-              totalSlides={this.state.nowPlayingMovies.length}
-              visibleSlides={5}
-              infinite={true}
-              step={2}
+            totalSlides={this.state.nowPlayingMovies.length}
+            naturalSlideWidth={responsiveConfig.width}
+            naturalSlideHeight={responsiveConfig.height}
+            visibleSlides={responsiveConfig.visibleSlides}
+            infinite={true}
+            step={responsiveConfig.step}
             >
               <Slider>
                 { nowPlayingMovies }
@@ -239,12 +266,12 @@ class HomePage extends Component {
               />
             </div> :
             <CarouselProvider
-              naturalSlideWidth={75}
-              naturalSlideHeight={125}
               totalSlides={this.state.upcomingMovies.length}
-              visibleSlides={5}
+              naturalSlideWidth={responsiveConfig.width}
+              naturalSlideHeight={responsiveConfig.height}
+              visibleSlides={responsiveConfig.visibleSlides}
               infinite={true}
-              step={2}
+              step={responsiveConfig.step}
             >
               <Slider>
                 { upcomingMovies }
@@ -286,12 +313,12 @@ class HomePage extends Component {
               />
             </div> :
             <CarouselProvider
-              naturalSlideWidth={75}
-              naturalSlideHeight={125}
-              totalSlides={popularMovies.length}
-              visibleSlides={5}
-              infinite={true}
-              step={2}
+            totalSlides={this.state.popularMovies.length}
+            naturalSlideWidth={responsiveConfig.width}
+            naturalSlideHeight={responsiveConfig.height}
+            visibleSlides={responsiveConfig.visibleSlides}
+            infinite={true}
+            step={responsiveConfig.step}
             >
               <Slider>
                 {popularMovies}

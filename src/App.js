@@ -3,7 +3,6 @@ import NavigationBar from './components/NavigationBar';
 import './App.css';
 import 'pure-react-carousel/dist/react-carousel.es.css';
 
-import cinema2 from './assets/tv_monitors.jpg'
 import MovieDBLogo from './assets/movie-db-header-logo.png'
 import MoviesVideo from './assets/movies-intro.mp4'
 
