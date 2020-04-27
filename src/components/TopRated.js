@@ -37,7 +37,7 @@ class TopRated extends Component {
         if (topMovies.length > 0) {
             return topMovies.map((movie, i) =>
                 <div key={movie.id} className="movie-item">
-                    <MovieItem movie={movie}  {...this.props} />
+                    <MovieItem movie={movie} hasHoverState={true} {...this.props} />
                 </div>
             )
         }

@@ -17,7 +17,7 @@ class MyBookmarks extends Component {
 
                 return movie.id && (
                     <div key={movie.id} className="movie-item">
-                        <MovieItem movie={movie}  {...this.props} />
+                        <MovieItem movie={movie} hasHoverState={true} {...this.props} />
                     </div>
                 )
             })

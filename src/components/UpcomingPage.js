@@ -39,7 +39,7 @@ class UpcomingPage extends Component {
         if (upcomingMovies.length > 0) {
             return upcomingMovies.map((movie, i) =>
                 <div key={movie.id} className="movie-item">
-                    <MovieItem movie={movie} {...this.props} />
+                    <MovieItem movie={movie} hasHoverState={true} {...this.props} />
                 </div>
             )
         }

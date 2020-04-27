@@ -116,7 +116,7 @@ class MovieDetails extends Component {
     const movies = this.state.similarMovies.map((movie, i) => {
       return i < 6 && (
         <div key={movie.id} className="movie-item">
-          <MovieItem movie={movie} {...this.props} />
+          <MovieItem movie={movie} hasHoverState={false} {...this.props} />
         </div>
       )
     })
@@ -127,7 +127,7 @@ class MovieDetails extends Component {
     const movies = this.state.recommended.map((movie, i) => {
       return i < 6 && (
         <div key={movie.id} className="movie-item">
-          <MovieItem movie={movie} {...this.props} />
+          <MovieItem movie={movie} hasHoverState={false} {...this.props} />
         </div>
       )
     })

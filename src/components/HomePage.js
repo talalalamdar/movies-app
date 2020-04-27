@@ -85,7 +85,7 @@ class HomePage extends Component {
       return trendingMovies.map((movie, i) => {
         return (
           <Slide index={i} key={movie.id} className="carousel__movie-item">
-             <MovieItem movie={movie} {...this.props} />
+             <MovieItem movie={movie} hasHoverState={true} {...this.props} />
           </Slide>
         )
       }
@@ -98,7 +98,7 @@ class HomePage extends Component {
     if (nowPlayingMovies.length > 0) {
       return nowPlayingMovies.map((movie, i) =>
         <Slide index={i} key={movie.id} className="carousel__movie-item">
-          <MovieItem  movie={movie} {...this.props} />
+          <MovieItem  movie={movie} hasHoverState={true} {...this.props} />
         </Slide>
       )
     }
@@ -109,7 +109,7 @@ class HomePage extends Component {
     if (upcomingMovies.length > 0) {
       return upcomingMovies.map((movie, i) =>
         <Slide index={i} key={movie.id} className="carousel__movie-item">
-          <MovieItem movie={movie} {...this.props} />
+          <MovieItem movie={movie} hasHoverState={true} {...this.props} />
         </Slide>
       )
     }
@@ -120,7 +120,7 @@ class HomePage extends Component {
     if (popularMovies.length > 0) {
       return popularMovies.map((movie, i) =>
         <Slide index={i} key={movie.id} className="carousel__movie-item">
-          <MovieItem movie={movie} {...this.props} />
+          <MovieItem movie={movie} hasHoverState={true} {...this.props} />
         </Slide>
       )
     }

@@ -38,7 +38,7 @@ class TrendingPage extends Component {
         if (trendingMovies.length > 0) {
             return trendingMovies.map((movie, i) =>
                 <div key={movie.id} className="movie-item">
-                    <MovieItem movie={movie} {...this.props} />
+                    <MovieItem movie={movie} hasHoverState={true} {...this.props} />
                 </div>
             )
         }

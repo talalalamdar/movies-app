@@ -16,7 +16,7 @@ class RatedList extends Component {
                 return movie.movie && movie.movie.id && (
                     <div className="rated-movie-item" key={movie.movie.id} >
                         <div className="movie-item">
-                            <MovieItem movie={movie.movie}  {...this.props} />
+                            <MovieItem movie={movie.movie} hasHoverState={true} {...this.props} />
                         </div>
                         <div className="movie-item-rating">
                             <Rating style={{ marginTop: 10 }} initialRating={movie.value} start={1} stop={2} fractions={2}

@@ -90,7 +90,7 @@ class SearchPage extends Component {
 
         return movie.id && (
           <div key={movie.id} className="movie-item">
-            <MovieItem key={movie.id} movie={movie} {...this.props} />
+            <MovieItem key={movie.id} hasHoverState={true} movie={movie} {...this.props} />
           </div>
 
         )

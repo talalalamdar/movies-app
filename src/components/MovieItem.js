@@ -123,7 +123,7 @@ class MovieItem extends Component {
       popularity,
       release_date,
       vote_average,
-      vote_count
+      vote_count,
     } = this.props.movie
     const { myFavoritesMovies } = this.props.favoritesReducer
     const { moviesPlan } = this.props.planReducer
@@ -151,7 +151,7 @@ class MovieItem extends Component {
           src={poster_path ? `https://image.tmdb.org/t/p/w500${poster_path}` : unavailablePoster} alt={`${title}-movie`}
         />
 
-        {movieHoverStatus &&
+        {movieHoverStatus && this.props.hasHoverState &&
           <div className="movie-info">
             <div style={{ width: '100%', height: '40px', textAlign: 'right' }}>
               {!isBookmarksPage && (

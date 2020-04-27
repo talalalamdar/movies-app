@@ -15,7 +15,7 @@ class MyPlan extends Component {
             const movies = planMovies.map((movie, i) => {
                 return (
                     <div key={movie.id} className="movie-item">
-                        <MovieItem movie={movie}  {...this.props}/>
+                        <MovieItem movie={movie} hasHoverState={true} {...this.props}/>
                     </div>
                 )
             })
