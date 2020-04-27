@@ -241,6 +241,17 @@ body {
   animation-fill-mode: forwards;
 }
 
+.movieDetails-navigate-btn {
+  background: rgb(59, 122, 40);
+  padding: 8px 12px;
+  border-radius: 3px;
+}
+
+.movieDetails-navigate-btn:hover {
+  color: rgb(59, 122, 40);
+  background: #fff;
+}
+
 .movie-item:hover {
   transform: translateY(-5px) !important;
 }
@@ -263,22 +274,28 @@ body {
   position: absolute;
   top: 40px;
   right: 20px;
-  width: 60%;
-  padding: 20px;
+  left: 20px;
+  padding: 8px 0;
   animation-name: displayOptionsMenu;
   animation-duration: 0.5s;
   border-radius: 4px;
 }
 
 .buttons-div > div {
-  font-size: 18px;
+  padding: 8px 12px;
+  font-size: 14px;
   text-align: left;
   transition: color 0.2s;
   width: 100%;
+  border-bottom: 1px solid lightgrey;
+}
+
+.buttons-div > div:last-child {
+  border: none;
 }
 
 .buttons-div > div:hover {
-  color: #222;
+  color: rgb(59, 122, 40);
 }
 
 .details-div {

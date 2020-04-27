@@ -117,6 +117,10 @@ class MovieItem extends Component {
     })
   }
 
+  handleGoToMovieDetails = () => {
+    window.location.href = `${window.location.origin}/movie/${this.props.movie.id}`;
+  }
+
   render() {
     const { title,
       poster_path,
@@ -139,10 +143,10 @@ class MovieItem extends Component {
 
 
     return (
-      <a
-        href={`/movie/${this.props.movie.id}`}
+      <div
         pose='open'
         className='movie-div'
+        onClick={() => !this.props.hasHoverState && this.handleGoToMovieDetails()}
         onMouseEnter={() => this.handleMouseHover(true)}
         onMouseLeave={() => this.handleMouseHover(false) & this.setState({ showOptionsMenu: false })}
       >
@@ -165,7 +169,7 @@ class MovieItem extends Component {
               </div>
             </div>
 
-            <div style={{ height: '100%', width: '100%' }}>
+            <div style={{ width: '100%' }}>
               <h6>{title.length > 35 ? title.substr(0, 35) + "..." : title}</h6>
 
               <div  className="details-div">
@@ -186,6 +190,10 @@ class MovieItem extends Component {
                   <strong style={{ padding: 5 }}>{release_date && release_date}</strong>
                 </div>
               </div>
+            </div>
+
+            <div style={{ marginTop: 20 }}>
+              <a className="movieDetails-navigate-btn" href={`/movie/${this.props.movie.id}`}>More info</a>
             </div>
 
             {showOptionsMenu &&
@@ -228,7 +236,7 @@ class MovieItem extends Component {
             </Button>
           </Modal.Footer>
         </Modal>
-      </a>
+      </div>
     )
   }
 
