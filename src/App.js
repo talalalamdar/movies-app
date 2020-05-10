@@ -17,7 +17,7 @@ class App extends Component {
       <div className="App">
         <div className="header">
           <video className="header-img" autoPlay muted loop>
-            <source src={MoviesVideo} type="video/mp4" />
+            <source src="https://movies-app-video.s3.eu-central-1.amazonaws.com/movies-intro.mp4" type="video/mp4" />
           </video>
 
           <div style={{ position: 'absolute', width: '100%', height: '100%', top: 0, right: 0, backgroundColor: 'rgba(59, 122, 40, 0.3)' }}>
